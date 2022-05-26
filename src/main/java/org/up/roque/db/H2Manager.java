@@ -12,7 +12,6 @@ public abstract class H2Manager {
 
   public static final String USERNAME = "sa";
   public static final String SECRET = "";
-  public static final String H2_DIR = "h2/";
   public static final String DRIVER = "org.h2.Driver";
 
   public Connection connect(String dbName) {
@@ -44,7 +43,7 @@ public abstract class H2Manager {
   }
 
   public String getCurrentH2Dir() {
-    File file = new File(H2_DIR);
+    File file = new File("h2/");
     return file.getAbsolutePath();
   }
 }

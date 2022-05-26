@@ -1,13 +1,13 @@
 package org.up.roque.project.employee;
 
 import lombok.RequiredArgsConstructor;
-import org.up.roque.db.DBManager;
+import org.up.roque.db.DBTemplate;
 
 import java.util.Set;
 
 @RequiredArgsConstructor
 public class EmployeeCrudRepositoryImpl implements EmployeeCrudRepository {
-  private final DBManager manager;
+  private final DBTemplate manager;
 
   @Override
   public Employee save(Employee employee) {
