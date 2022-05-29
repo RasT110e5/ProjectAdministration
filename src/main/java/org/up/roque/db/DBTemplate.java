@@ -1,9 +1,11 @@
 package org.up.roque.db;
 
+import lombok.SneakyThrows;
+
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public abstract class DBTemplate {
   protected DataSource dataSource;
@@ -11,6 +13,22 @@ public abstract class DBTemplate {
   public abstract void initSchema();
 
   public abstract void teardown();
+
+  public <T> T save(String sql, Class<T> idType, LinkedHashMap<StatementParameter, Object> params) {
+    try (Transaction transaction = new Transaction(dataSource)) {
+      ResultSet rs = transaction.save(sql, params);
+      return getGeneratedId(idType, rs);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private <T> T getGeneratedId(Class<T> idType, ResultSet rs) throws SQLException {
+    if (rs.next())
+      return rs.getObject(1, idType);
+    else
+      throw new RuntimeException();
+  }
 
   public void update(String sql) {
     try (Transaction transaction = new Transaction(dataSource)) {
@@ -20,9 +38,9 @@ public abstract class DBTemplate {
 
   protected boolean isHealthy() {
     try (Transaction transaction = new Transaction(dataSource)) {
-      transaction.query("SELECT 1");
-      return true;
-    } catch (RuntimeException e) {
+      ResultSet rs = transaction.query("SELECT 1");
+      return rs.next();
+    } catch (RuntimeException | SQLException e) {
       return false;
     }
   }
@@ -40,6 +58,20 @@ public abstract class DBTemplate {
       }
     }
 
+    @SneakyThrows
+    public ResultSet save(String sql, LinkedHashMap<StatementParameter, Object> params) {
+      try {
+        PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        int index = 1;
+        for (Map.Entry<StatementParameter, Object> param : params.entrySet())
+          param.getKey().setInPreparedStatement(statement, index++, param.getValue());
+        statement.executeUpdate();
+        return statement.getGeneratedKeys();
+      } catch (SQLException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
     public void update(String sql) {
       try (Statement statement = connection.createStatement()) {
         statement.executeUpdate(sql);
@@ -48,9 +80,9 @@ public abstract class DBTemplate {
       }
     }
 
-    public void query(String sql) {
+    public ResultSet query(String sql) {
       try (Statement statement = connection.createStatement()) {
-        statement.execute(sql);
+        return statement.executeQuery(sql);
       } catch (SQLException e) {
         throw new RuntimeException(e);
       }
@@ -65,6 +97,7 @@ public abstract class DBTemplate {
         throw new RuntimeException(e);
       }
     }
+
   }
 }
 

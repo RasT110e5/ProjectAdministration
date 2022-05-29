@@ -11,12 +11,12 @@ class DBTemplateTest {
 
   @Test
   @DisplayName("should create schema correctly")
-  void employeeCrudRepositoryImplTest_() {
+  void dbTemplate_() {
     try {
       manager.initSchema();
       manager.isHealthy();
       manager.teardown();
-    } catch (Exception e){
+    } catch (Exception e) {
       fail("Schema initiation shouldn't throw any exceptions while testing", e);
     }
   }

@@ -1,5 +1,6 @@
-CREATE TABLE EMPLOYEES
+CREATE TABLE EMPLOYEE
 (
-    id            INT PRIMARY KEY,
-    cost_per_hour INTEGER
+    ID            IDENTITY PRIMARY KEY,
+    NAME          TEXT,
+    COST_PER_HOUR INTEGER
 )
