@@ -1,9 +1,6 @@
 package org.up.roque.project.employee;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Singular;
+import lombok.*;
 import org.up.roque.project.PartOfProject;
 import org.up.roque.project.Project;
 
@@ -13,7 +10,9 @@ import java.util.List;
 @Builder
 @Data
 @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Employee implements PartOfProject {
+  @EqualsAndHashCode.Include
   private Integer id;
   private String name;
   private Integer costPerHour;

@@ -1,7 +1,9 @@
 package org.up.roque.util;
 
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.h2.jdbcx.JdbcDataSource;
+import org.mockito.internal.invocation.finder.AllInvocationsFinder;
 import org.up.roque.db.DBTemplate;
 
 import javax.swing.plaf.nimbus.State;
@@ -12,6 +14,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+@Slf4j
 public class TestDBManager extends DBTemplate {
   public static final File SCHEMA_FILE = new File("src/main/resources/schema.sql");
   private static final File DB_FILE = new File("h2/test.mv.db");
@@ -39,6 +42,7 @@ public class TestDBManager extends DBTemplate {
   @Override
   @SneakyThrows
   public void initSchema() {
+    log.info("Initiating schema for testing");
     teardown();
     String schemaScript = readSchemaScript();
     update(schemaScript);
@@ -46,15 +50,20 @@ public class TestDBManager extends DBTemplate {
 
   @Override
   public void teardown() {
-    if (DB_FILE.exists() && !DB_FILE.delete())
+    log.info("Tearing down DB (deleting file)");
+    if (DB_FILE.exists() && !DB_FILE.delete()) {
       //TODO: replace this exception with a custom one
+      log.warn("DB couldn't be deleted, the file may not exist");
       throw new RuntimeException();
+    }
   }
 
   public boolean isHealthy() {
-    if (!DB_FILE.exists())
-      //TODO: replace this exception with a custom one
+    if (!DB_FILE.exists()){
+    //TODO: replace this exception with a custom one
+      log.warn("DB does not exist");
       throw new RuntimeException();
+    }
     return super.isHealthy();
   }
 }

@@ -4,9 +4,9 @@ import org.up.roque.project.employee.Employee;
 
 import java.util.Set;
 
-public interface CrudRepository<T> {
+public interface CrudRepository<T, ID> {
   T save(T entity);
-  void delete(T entity);
+  void delete(ID id);
   Set<T> findAll();
-  T getOne();
+  T getOne(ID id);
 }
