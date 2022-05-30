@@ -2,6 +2,7 @@ package org.up.roque.project.employee;
 
 import lombok.RequiredArgsConstructor;
 import org.up.roque.db.DBTemplate;
+import org.up.roque.db.DataAccessException;
 import org.up.roque.db.SqlParam;
 
 import javax.print.attribute.standard.MediaSize;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -79,11 +81,15 @@ public class EmployeeCrudRepositoryImpl implements EmployeeCrudRepository {
 
   @Override
   public Employee getOne(Integer id) {
-    return template.query(SELECT + " WHERE ID=?", getIdAsParam(id), rs ->
-        getBaseBuilderParser(rs)
-            .id(id)
-            .build()
-    ).iterator().next();
+    try {
+      return template.query(SELECT + " WHERE ID=?", getIdAsParam(id), rs ->
+          getBaseBuilderParser(rs)
+              .id(id)
+              .build()
+      ).iterator().next();
+    } catch (NoSuchElementException e) {
+      throw new DataAccessException("No employee found for ID=%s".formatted(id));
+    }
   }
 
   private Employee.EmployeeBuilder getBaseBuilderParser(ResultSet rs) throws SQLException {

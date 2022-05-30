@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.h2.jdbcx.JdbcDataSource;
 import org.mockito.internal.invocation.finder.AllInvocationsFinder;
 import org.up.roque.db.DBTemplate;
+import org.up.roque.db.DataAccessException;
 
 import javax.swing.plaf.nimbus.State;
 import java.io.File;
@@ -52,17 +53,15 @@ public class TestDBManager extends DBTemplate {
   public void teardown() {
     log.info("Tearing down DB (deleting file)");
     if (DB_FILE.exists() && !DB_FILE.delete()) {
-      //TODO: replace this exception with a custom one
-      log.warn("DB couldn't be deleted, the file may not exist");
-      throw new RuntimeException();
+      throw new DataAccessException("Teardown was failed, either due to non existent" +
+          " DB or error on deletion from filesystem");
     }
   }
 
   public boolean isHealthy() {
     if (!DB_FILE.exists()){
-    //TODO: replace this exception with a custom one
       log.warn("DB does not exist");
-      throw new RuntimeException();
+      throw new DataAccessException("Cannot perform health check on a non existent DB");
     }
     return super.isHealthy();
   }

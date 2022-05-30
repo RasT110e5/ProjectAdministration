@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.up.roque.db.DataAccessException;
 import org.up.roque.util.Entities;
 import org.up.roque.util.TestDBManager;
 
@@ -56,6 +57,13 @@ class EmployeeCrudRepositoryImplTest {
   void employeeCrudRepositoryImplTest_3() {
     Employee persistedEmployee = saveNewEmployee();
     assertThat(repository.getOne(1)).isEqualTo(persistedEmployee);
+  }
+
+  @Test
+  @DisplayName("should throw an exception if get doesn't find an entity")
+  void employeeCrudRepositoryImplTest_5() {
+    assertThrows(DataAccessException.class,
+        () -> repository.getOne(123));
   }
 
   @Test

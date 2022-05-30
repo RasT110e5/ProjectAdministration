@@ -29,7 +29,7 @@ public abstract class DBTemplate {
       ResultSet rs = transaction.save(sql, params);
       return getGeneratedId(idType, rs);
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      throw new DataAccessException(e);
     }
   }
 
@@ -37,7 +37,7 @@ public abstract class DBTemplate {
     if (rs.next())
       return rs.getObject(1, idType);
     else
-      throw new RuntimeException();
+      throw new DataAccessException("No row was returned on insert, Id should've been returned");
   }
 
   public void update(String sql) {
@@ -52,7 +52,7 @@ public abstract class DBTemplate {
     try (Transaction transaction = new Transaction(dataSource)) {
       ResultSet rs = transaction.query("SELECT 1");
       return rs.next();
-    } catch (RuntimeException | SQLException e) {
+    } catch (SQLException e) {
       log.error("DB is not healthy!!");
       return false;
     }
@@ -69,7 +69,7 @@ public abstract class DBTemplate {
       ResultSet rs = transaction.query(sql);
       return parseQueryResultSet(parser, rs);
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      throw new DataAccessException(e);
     }
   }
 
@@ -78,7 +78,7 @@ public abstract class DBTemplate {
       ResultSet rs = transaction.query(sql, params);
       return parseQueryResultSet(parser, rs);
     } catch (SQLException e) {
-      throw new RuntimeException(e);
+      throw new DataAccessException(e);
     }
   }
 
@@ -86,10 +86,7 @@ public abstract class DBTemplate {
     Set<T> entities = new HashSet<>();
     while (rs.next())
       entities.add(parser.parseRows(rs));
-    if (entities.isEmpty())
-      throw new RuntimeException();
-    else
-      return entities;
+    return entities;
   }
 
 
