@@ -67,4 +67,13 @@ class EmployeeCrudRepositoryImplTest {
         () -> repository.getOne(1));
   }
 
+  @Test
+  @DisplayName("should be able to select all from table")
+  void employeeCrudRepositoryImplTest_4() {
+    saveNewEmployee();
+    saveNewEmployee();
+    saveNewEmployee();
+    assertThat(repository.findAll()).isNotEmpty().hasSize(3);
+  }
+
 }

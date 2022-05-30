@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 public abstract class DBTemplate {
@@ -62,17 +64,34 @@ public abstract class DBTemplate {
     }
   }
 
-  public <T> T query(String sql, List<SqlParam> params, ResultSetParser<T> parser) {
+  public <T> Set<T> query(String sql, ResultSetParser<T> parser) {
     try (Transaction transaction = new Transaction(dataSource)) {
-      ResultSet rs = transaction.query(sql, params);
-      if (rs.next())
-        return parser.parseRows(rs);
-      else
-        throw new RuntimeException();
+      ResultSet rs = transaction.query(sql);
+      return parseQueryResultSet(parser, rs);
     } catch (SQLException e) {
       throw new RuntimeException(e);
     }
   }
+
+  public <T> Set<T> query(String sql, List<SqlParam> params, ResultSetParser<T> parser) {
+    try (Transaction transaction = new Transaction(dataSource)) {
+      ResultSet rs = transaction.query(sql, params);
+      return parseQueryResultSet(parser, rs);
+    } catch (SQLException e) {
+      throw new RuntimeException(e);
+    }
+  }
+
+  private <T> Set<T> parseQueryResultSet(ResultSetParser<T> parser, ResultSet rs) throws SQLException {
+    Set<T> entities = new HashSet<>();
+    while (rs.next())
+      entities.add(parser.parseRows(rs));
+    if (entities.isEmpty())
+      throw new RuntimeException();
+    else
+      return entities;
+  }
+
 
   public interface ResultSetParser<T> {
     T parseRows(ResultSet rs) throws SQLException;
@@ -134,7 +153,8 @@ public abstract class DBTemplate {
     }
 
     public ResultSet query(String sql) {
-      try (Statement statement = connection.createStatement()) {
+      try {
+        Statement statement = connection.createStatement();
         return statement.executeQuery(sql);
       } catch (SQLException e) {
         throw new RuntimeException(e);

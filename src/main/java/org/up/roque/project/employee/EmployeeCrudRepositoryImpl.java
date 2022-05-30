@@ -4,6 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.up.roque.db.DBTemplate;
 import org.up.roque.db.SqlParam;
 
+import javax.print.attribute.standard.MediaSize;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -19,8 +22,8 @@ public class EmployeeCrudRepositoryImpl implements EmployeeCrudRepository {
   private static final String TABLE = "EMPLOYEE";
 
   private static final String DELETE = "DELETE FROM %s WHERE ID=?".formatted(TABLE);
-  private static final String SELECT = "SELECT %s,%s FROM %s WHERE ID=?"
-      .formatted(NAME_COLUMN, COST_COLUMN, TABLE);
+  private static final String SELECT = ("SELECT %s,%s,%s FROM %s")
+      .formatted(ID_COLUMN, NAME_COLUMN, COST_COLUMN, TABLE);
   private static final String UPDATE = ("UPDATE %s SET %s=?, %s=? WHERE %s=?")
       .formatted(TABLE, NAME_COLUMN, COST_COLUMN, ID_COLUMN);
   private static final String INSERT = ("INSERT INTO %s (%s, %s) VALUES (?,?)")
@@ -68,17 +71,24 @@ public class EmployeeCrudRepositoryImpl implements EmployeeCrudRepository {
 
   @Override
   public Set<Employee> findAll() {
-    return null;
+    return template.query(SELECT, rs ->
+        getBaseBuilderParser(rs)
+            .id(rs.getInt(ID_COLUMN))
+            .build());
   }
 
   @Override
   public Employee getOne(Integer id) {
-    return template.query(SELECT, getIdAsParam(id), rs ->
-        Employee.builder()
+    return template.query(SELECT + " WHERE ID=?", getIdAsParam(id), rs ->
+        getBaseBuilderParser(rs)
             .id(id)
-            .name(rs.getString(NAME_COLUMN))
-            .costPerHour(rs.getInt(COST_COLUMN))
             .build()
-    );
+    ).iterator().next();
+  }
+
+  private Employee.EmployeeBuilder getBaseBuilderParser(ResultSet rs) throws SQLException {
+    return Employee.builder()
+        .name(rs.getString(NAME_COLUMN))
+        .costPerHour(rs.getInt(COST_COLUMN));
   }
 }
