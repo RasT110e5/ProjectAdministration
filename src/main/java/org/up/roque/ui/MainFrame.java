@@ -1,7 +1,8 @@
 package org.up.roque.ui;
 
 import lombok.extern.slf4j.Slf4j;
-import org.up.roque.project.employee.ui.EmployeeGridPanel;
+import org.up.roque.Application;
+import org.up.roque.project.employee.ui.EmployeeTablePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,19 +13,25 @@ import java.awt.event.WindowEvent;
 public class MainFrame extends WindowAdapter {
   public static final JPanel MAIN_PANEL = new JPanel(new FlowLayout(FlowLayout.CENTER));
   private static final JFrame J_FRAME = new JFrame("Project Administration");
-  private boolean running;
 
   private final HomePanelPlaceholder homePanel = new HomePanelPlaceholder();
-  private final EmployeeGridPanel employeeGridPanel = new EmployeeGridPanel();
   private final HeaderPanel headerPanel = new HeaderPanel();
 
+  private EmployeeTablePanel employeeTablePanel;
+  private boolean running;
+
+  public void init(Application application) {
+    this.employeeTablePanel = new EmployeeTablePanel(J_FRAME, application.getEmployeeService());
+  }
+
   public void show() {
-    this.running = true;
     setUpFrame();
     styleFrame();
     setHeader();
+
     MAIN_PANEL.add(homePanel);
     J_FRAME.setVisible(true);
+    this.running = true;
   }
 
   private void setHeader() {
@@ -39,7 +46,7 @@ public class MainFrame extends WindowAdapter {
   }
 
   public void showEmployeeGrid() {
-    navigate(employeeGridPanel);
+    navigate(employeeTablePanel);
   }
 
   private void navigate(CustomPanel navigateTo) {

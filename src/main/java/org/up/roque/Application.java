@@ -1,19 +1,32 @@
 package org.up.roque;
 
-import lombok.RequiredArgsConstructor;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.up.roque.db.DBTemplate;
+import org.up.roque.db.DBTemplateImpl;
+import org.up.roque.project.employee.EmployeeCrudRepositoryImpl;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.employee.EmployeeServiceImpl;
 import org.up.roque.ui.MainFrame;
 
 @Slf4j
-@RequiredArgsConstructor
 public class Application {
-  private final MainFrame FRAME;
+  private final MainFrame frame;
   private final DBTemplate dbTemplate;
 
+  @Getter
   private EmployeeService employeeService;
+
+  public Application(MainFrame frame) {
+    this.frame = frame;
+    this.dbTemplate = new DBTemplateImpl();
+  }
+
+  public void run() {
+    start();
+    while (frame.isRunning()) idle();
+    stop();
+  }
 
   private void start() {
     try {
@@ -28,11 +41,12 @@ public class Application {
   }
 
   private void startServices() {
-    employeeService = new EmployeeServiceImpl();
+    employeeService = new EmployeeServiceImpl(new EmployeeCrudRepositoryImpl(dbTemplate));
   }
 
   private void startUI() {
-    FRAME.show();
+    this.frame.init(this);
+    frame.show();
   }
 
   private void startDB() {
@@ -46,12 +60,7 @@ public class Application {
 
   private void stop() {
     log.info("Stopping application");
+    dbTemplate.teardown();
     System.exit(0);
-  }
-
-  public void run() {
-    start();
-    while (FRAME.isRunning()) idle();
-    stop();
   }
 }

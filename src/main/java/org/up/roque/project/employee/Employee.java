@@ -16,6 +16,7 @@ public class Employee implements PartOfProject {
   private Integer id;
   private String name;
   private Integer costPerHour;
+  @ToString.Exclude
   private final List<Project> projects;
 
   public Employee() {

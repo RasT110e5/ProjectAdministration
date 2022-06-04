@@ -11,6 +11,7 @@ import java.nio.file.Files;
 @Slf4j
 public class DBTemplateImpl extends DBTemplate {
   public static final File SCHEMA_FILE = new File("src/main/resources/schema.sql");
+  public static final File DATA_FILE = new File("src/main/resources/data.sql");
   private static final File DB_FILE = new File("h2/dev.mv.db");
   private static final String USER = "sa";
 
@@ -30,26 +31,38 @@ public class DBTemplateImpl extends DBTemplate {
   }
 
   private String readSchemaScript() throws IOException {
-    return String.join("", Files.readAllLines(SCHEMA_FILE.getAbsoluteFile().toPath()));
+    return readFile(SCHEMA_FILE);
+  }
+
+  private String readDataScript() throws IOException {
+    return readFile(DATA_FILE);
+  }
+
+  private String readFile(File file) throws IOException {
+    return String.join("", Files.readAllLines(file.getAbsoluteFile().toPath()));
   }
 
   @Override
-  @SneakyThrows
   public void initSchema() {
     if (!DB_FILE.exists()) {
-      log.info("Initiating schema for testing");
-      String schemaScript = readSchemaScript();
-      update(schemaScript);
+      try {
+        log.info("Initiating schema for testing");
+        String schemaScript = readSchemaScript();
+        update(schemaScript);
+        String dataScript = readDataScript();
+        update(dataScript);
+      } catch (IOException e) {
+        throw new DataAccessException("Schema scripts couldn't be read");
+      }
     }
   }
 
   @Override
   public void teardown() {
     log.info("Tearing down DB (deleting file)");
-    if (DB_FILE.exists() && !DB_FILE.delete()) {
-      throw new DataAccessException("Teardown was failed, either due to non existent" +
+    if (DB_FILE.exists() && !DB_FILE.delete())
+      throw new DataAccessException("Teardown failed, either due to non existent" +
           " DB or error on deletion from filesystem");
-    }
   }
 
   @Override
