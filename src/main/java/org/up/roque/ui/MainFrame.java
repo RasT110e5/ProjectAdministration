@@ -1,7 +1,10 @@
 package org.up.roque.ui;
 
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.up.roque.Application;
+import org.up.roque.project.employee.EmployeeService;
+import org.up.roque.project.employee.ui.CreateEmployeeForm;
 import org.up.roque.project.employee.ui.EmployeeTablePanel;
 
 import javax.swing.*;
@@ -11,17 +14,17 @@ import java.awt.event.WindowEvent;
 
 @Slf4j
 public class MainFrame extends WindowAdapter {
-  public static final JPanel MAIN_PANEL = new JPanel(new FlowLayout(FlowLayout.CENTER));
-  private static final JFrame J_FRAME = new JFrame("Project Administration");
-
-  private final HomePanelPlaceholder homePanel = new HomePanelPlaceholder();
+  @Getter
+  private final JFrame jFrame = new JFrame("Project Administration");
+  public final JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+  private final HomePanelPlaceholder homePanel = new HomePanelPlaceholder(this);
   private final HeaderPanel headerPanel = new HeaderPanel();
 
-  private EmployeeTablePanel employeeTablePanel;
+  private EmployeeService employeeService;
   private boolean running;
 
   public void init(Application application) {
-    this.employeeTablePanel = new EmployeeTablePanel(J_FRAME, application.getEmployeeService());
+    this.employeeService = application.getEmployeeService();
   }
 
   public void show() {
@@ -29,8 +32,8 @@ public class MainFrame extends WindowAdapter {
     styleFrame();
     setHeader();
 
-    MAIN_PANEL.add(homePanel);
-    J_FRAME.setVisible(true);
+    mainPanel.add(homePanel);
+    jFrame.setVisible(true);
     this.running = true;
   }
 
@@ -38,7 +41,7 @@ public class MainFrame extends WindowAdapter {
     headerPanel.setTitle(homePanel.getTitle());
     headerPanel.setReturnActionListener(e -> showHome());
     headerPanel.setEmployeeActionListener(e -> showEmployeeGrid());
-    MAIN_PANEL.add(headerPanel);
+    mainPanel.add(headerPanel);
   }
 
   public void showHome() {
@@ -46,30 +49,34 @@ public class MainFrame extends WindowAdapter {
   }
 
   public void showEmployeeGrid() {
-    navigate(employeeTablePanel);
+    navigate(new EmployeeTablePanel(this, employeeService));
+  }
+
+  public void showEmployeeCreateForm() {
+    navigate(new CreateEmployeeForm(this, employeeService));
   }
 
   private void navigate(CustomPanel navigateTo) {
-    MAIN_PANEL.remove(1);
-    MAIN_PANEL.add(navigateTo);
+    mainPanel.remove(1);
+    mainPanel.add(navigateTo);
     headerPanel.setTitle(navigateTo.getTitle());
-    MAIN_PANEL.validate();
-    MAIN_PANEL.repaint();
+    mainPanel.validate();
+    mainPanel.repaint();
   }
 
   private void styleFrame() {
-    J_FRAME.setBounds(250, 250, 800, 600);
+    jFrame.setBounds(250, 250, 800, 600);
     stylePanel();
-    J_FRAME.add(MAIN_PANEL);
+    jFrame.add(mainPanel);
   }
 
   private void stylePanel() {
-    MAIN_PANEL.setBounds(0, 0, 800, 100);
+    mainPanel.setBounds(0, 0, 800, 100);
   }
 
   private void setUpFrame() {
-    J_FRAME.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-    J_FRAME.addWindowListener(this);
+    jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    jFrame.addWindowListener(this);
   }
 
   public synchronized boolean isRunning() {
@@ -79,7 +86,7 @@ public class MainFrame extends WindowAdapter {
   @Override
   public void windowClosing(WindowEvent e) {
     log.info("Closing");
-    J_FRAME.setVisible(false);
+    jFrame.setVisible(false);
     this.running = false;
   }
 }

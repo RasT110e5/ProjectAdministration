@@ -9,16 +9,13 @@ import java.awt.*;
 
 public class EmployeeTablePanel extends CustomPanel {
   private final EmployeeTableModel model;
-  private final JFrame frame;
+  private final JTable table;
+  private final JButton add = new JButton("Add");
+  private final JButton delete = new JButton("Delete");
+  private final JButton edit = new JButton("Edit");
 
-  private JTable table;
-  private JButton add = new JButton("Add");
-  private JButton delete = new JButton("Delete");
-  private JButton edit = new JButton("Edit");
-
-  public EmployeeTablePanel(JFrame frame, EmployeeService employeeService) {
-    super("Employee Grid");
-    this.frame = frame;
+  public EmployeeTablePanel(MainFrame frame, EmployeeService employeeService) {
+    super("Employee Grid", frame);
     this.model = new EmployeeTableModel(frame, employeeService);
 
     table = new JTable(model);
@@ -29,6 +26,7 @@ public class EmployeeTablePanel extends CustomPanel {
     buttonsLayout.add(edit);
 
     delete.addActionListener(e -> model.delete(table.getSelectedRow()));
+    add.addActionListener(e -> frame.showEmployeeCreateForm());
 
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     this.add(scrollBar);

@@ -23,7 +23,17 @@ public class EmployeeServiceImpl implements EmployeeService {
       repository.delete(employee.getId());
     } catch (DataAccessException e) {
       log.warn("Exception while trying to delete {}, exception: {}", employee, e.toString());
-      throw new ProcessingException("Entity couldn't be deleted");
+      throw new ProcessingException("Employee couldn't be deleted");
+    }
+  }
+
+  @Override
+  public void save(Employee employee) {
+    try {
+      repository.save(employee);
+    } catch (DataAccessException e) {
+      log.warn("Exception while saving {}, exception: {}", employee, e.toString());
+      throw new ProcessingException("Employee couldn't be saved");
     }
   }
 }

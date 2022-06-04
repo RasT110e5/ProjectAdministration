@@ -6,4 +6,6 @@ public interface EmployeeService {
   Set<Employee> findAll();
 
   void delete(Employee employee);
+
+  void save(Employee employee);
 }
