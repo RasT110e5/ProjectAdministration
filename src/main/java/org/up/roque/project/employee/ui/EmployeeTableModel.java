@@ -54,11 +54,15 @@ public class EmployeeTableModel extends AbstractTableModel {
     return columns.get(columnIndex).getType();
   }
 
+  public Employee getRow(int row){
+    if (isInvalidRow(row))
+      return null;
+    else
+      return employees.get(row);
+  }
+
   public void delete(int row) {
-    if (row < 0) {
-      DialogUtils.error(parentFrame, "No row is selected");
-      return;
-    }
+    if (isInvalidRow(row)) return;
     Employee employee = employees.get(row);
     int response = DialogUtils.confirmation(parentFrame,
         "Are you sure you want to delete employee '%s'?".formatted(employee.getName()), "Delete?");
@@ -72,6 +76,14 @@ public class EmployeeTableModel extends AbstractTableModel {
       employees.remove(row);
       fireTableDataChanged();
     }
+  }
+
+  private boolean isInvalidRow(int row) {
+    if (row < 0) {
+      DialogUtils.error(parentFrame, "No row is selected");
+      return true;
+    }
+    return false;
   }
 
 }

@@ -3,8 +3,10 @@ package org.up.roque.ui;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.up.roque.Application;
+import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.employee.ui.CreateEmployeeForm;
+import org.up.roque.project.employee.ui.EditEmployeeForm;
 import org.up.roque.project.employee.ui.EmployeeTablePanel;
 
 import javax.swing.*;
@@ -56,6 +58,10 @@ public class MainFrame extends WindowAdapter {
     navigate(new CreateEmployeeForm(this, employeeService));
   }
 
+  public void showEmployeeEditForm(Employee employee) {
+    navigate(new EditEmployeeForm(this, employeeService, employee));
+  }
+
   private void navigate(CustomPanel navigateTo) {
     mainPanel.remove(1);
     mainPanel.add(navigateTo);
@@ -89,4 +95,5 @@ public class MainFrame extends WindowAdapter {
     jFrame.setVisible(false);
     this.running = false;
   }
+
 }

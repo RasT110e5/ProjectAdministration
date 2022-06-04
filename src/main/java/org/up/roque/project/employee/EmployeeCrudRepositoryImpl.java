@@ -5,7 +5,6 @@ import org.up.roque.db.DBTemplate;
 import org.up.roque.db.DataAccessException;
 import org.up.roque.db.SqlParam;
 
-import javax.print.attribute.standard.MediaSize;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
@@ -43,7 +42,7 @@ public class EmployeeCrudRepositoryImpl implements EmployeeCrudRepository {
   }
 
   private List<SqlParam> getAllPropertiesAsParam(Employee employee) {
-    return Stream.of(getIdAsParam(employee.getId()), getPropertiesAsParam(employee))
+    return Stream.of(getPropertiesAsParam(employee), getIdAsParam(employee.getId()))
         .flatMap(Collection::stream)
         .collect(Collectors.toList());
   }

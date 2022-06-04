@@ -1,5 +1,6 @@
 package org.up.roque.project.employee.ui;
 
+import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.ui.CustomPanel;
 import org.up.roque.ui.MainFrame;
@@ -27,10 +28,17 @@ public class EmployeeTablePanel extends CustomPanel {
 
     delete.addActionListener(e -> model.delete(table.getSelectedRow()));
     add.addActionListener(e -> frame.showEmployeeCreateForm());
+    edit.addActionListener(e -> showEmployeeEditForm());
 
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     this.add(scrollBar);
     this.add(buttonsLayout);
+  }
+
+  private void showEmployeeEditForm() {
+    Employee employee = model.getRow(table.getSelectedRow());
+    if (employee != null)
+      frame.showEmployeeEditForm(employee);
   }
 
 

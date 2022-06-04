@@ -1,6 +1,5 @@
 package org.up.roque.db;
 
-import javax.xml.crypto.Data;
 import java.sql.SQLException;
 
 public class DataAccessException extends RuntimeException {

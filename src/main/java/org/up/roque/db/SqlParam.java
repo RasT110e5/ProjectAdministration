@@ -4,7 +4,6 @@ import lombok.Value;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.concurrent.LinkedBlockingDeque;
 
 @Value
 public class SqlParam {

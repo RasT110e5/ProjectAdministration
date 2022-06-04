@@ -47,8 +47,8 @@ class EmployeeCrudRepositoryImplTest {
     anotherEmployee.setId(employee.getId());
     anotherEmployee.setCostPerHour(costPerHour);
     anotherEmployee.setName(employee.getName());
-    Employee updatedEmployee = repository.save(anotherEmployee);
-    assertThat(updatedEmployee).isEqualTo(employee)
+    repository.save(anotherEmployee);
+    assertThat(repository.getOne(employee.getId())).isEqualTo(employee)
         .extracting(Employee::getCostPerHour).isEqualTo(costPerHour);
   }
 
