@@ -16,6 +16,8 @@ public abstract class DBTemplate {
 
   public abstract void teardown();
 
+  public abstract boolean healthCheck();
+
   public void save(String sql, List<SqlParam> params) {
     log.info("Saving existing entity with {}", sql);
     try (Transaction transaction = new Transaction(dataSource)) {

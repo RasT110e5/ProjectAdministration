@@ -2,12 +2,12 @@ package org.up.roque.db;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.up.roque.util.TestDBManager;
+import org.up.roque.util.TestDBTemplate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DBTemplateTest {
-  TestDBManager manager = new TestDBManager();
+  TestDBTemplate manager = new TestDBTemplate();
 
   @Test
   @DisplayName("should create schema correctly")

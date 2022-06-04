@@ -3,25 +3,20 @@ package org.up.roque.util;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.jdbcx.JdbcDataSource;
-import org.mockito.internal.invocation.finder.AllInvocationsFinder;
 import org.up.roque.db.DBTemplate;
 import org.up.roque.db.DataAccessException;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 @Slf4j
-public class TestDBManager extends DBTemplate {
+public class TestDBTemplate extends DBTemplate {
   public static final File SCHEMA_FILE = new File("src/main/resources/schema.sql");
   private static final File DB_FILE = new File("h2/test.mv.db");
   private static final String USER = "sa";
 
-  public TestDBManager() {
+  public TestDBTemplate() {
     JdbcDataSource h2Datasource = new JdbcDataSource();
     h2Datasource.setUrl(getJdbcUrl());
     h2Datasource.setUser(USER);
@@ -58,7 +53,8 @@ public class TestDBManager extends DBTemplate {
     }
   }
 
-  public boolean isHealthy() {
+  @Override
+  public boolean healthCheck() {
     if (!DB_FILE.exists()){
       log.warn("DB does not exist");
       throw new DataAccessException("Cannot perform health check on a non existent DB");

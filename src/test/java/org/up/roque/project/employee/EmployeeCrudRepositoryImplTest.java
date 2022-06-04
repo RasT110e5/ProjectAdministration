@@ -6,23 +6,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.up.roque.db.DataAccessException;
 import org.up.roque.util.Entities;
-import org.up.roque.util.TestDBManager;
+import org.up.roque.util.TestDBTemplate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmployeeCrudRepositoryImplTest {
-  TestDBManager testDBManager = new TestDBManager();
-  EmployeeCrudRepositoryImpl repository = new EmployeeCrudRepositoryImpl(testDBManager);
+  TestDBTemplate testDBTemplate = new TestDBTemplate();
+  EmployeeCrudRepositoryImpl repository = new EmployeeCrudRepositoryImpl(testDBTemplate);
 
   @BeforeEach
   public void setup() {
-    testDBManager.initSchema();
+    testDBTemplate.initSchema();
   }
 
   @AfterEach
   public void teardown() {
-    testDBManager.teardown();
+    testDBTemplate.teardown();
   }
 
   private Employee saveNewEmployee() {

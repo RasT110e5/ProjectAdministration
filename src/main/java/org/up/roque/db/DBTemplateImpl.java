@@ -53,7 +53,7 @@ public class DBTemplateImpl extends DBTemplate {
   }
 
   @Override
-  public boolean isHealthy() {
+  public boolean healthCheck() {
     if (!DB_FILE.exists()) {
       log.warn("DB does not exist");
       throw new DataAccessException("Cannot perform health check on a non existent DB");
