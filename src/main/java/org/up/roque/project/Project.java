@@ -1,13 +1,24 @@
 package org.up.roque.project;
 
+import lombok.*;
+import org.up.roque.db.Entity;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Project {
+@Builder
+@Data
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Project implements Entity<Integer> {
+  @EqualsAndHashCode.Include
+  private Integer id;
+  private String name;
+  @ToString.Exclude
   private final List<Task> tasks;
+  @ToString.Exclude
   private final List<Employee> employees;
 
   public Project() {
