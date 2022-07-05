@@ -7,9 +7,12 @@ import org.up.roque.project.employee.Employee;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
-public class ProjectCrudRepositoryImpl extends CrudRepositoryTemplate<Project, Integer> implements ProjectCrudRepository {
+public class ProjectCrudRepositoryImpl extends CrudRepositoryTemplate<Project, Integer>
+    implements ProjectCrudRepository {
   private static final String NAME_COLUMN = "NAME";
   private static final String ID_COLUMN = "ID";
   private static final String TABLE = "PROJECT";
@@ -57,5 +60,19 @@ public class ProjectCrudRepositoryImpl extends CrudRepositoryTemplate<Project, I
   private Project.ProjectBuilder getBaseBuilderParser(ResultSet rs) throws SQLException {
     return Project.builder()
         .name(rs.getString(NAME_COLUMN));
+  }
+
+  @Override
+  public Set<Integer> getEmployeeIds(Project entity) {
+    return template.query(
+        "SELECT EMPLOYEE FROM EMPLOYEE_PROJECT WHERE PROJECT = ?",
+        getIdAsParam(entity.getId()),
+        rs -> rs.getInt("EMPLOYEE")
+    );
+  }
+
+  @Override
+  public Set<Integer> getTasksIds(Project entity) {
+    return Collections.emptySet();
   }
 }

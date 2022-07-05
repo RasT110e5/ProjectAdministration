@@ -13,6 +13,11 @@ public class EmployeeServiceImpl implements EmployeeService {
   private final EmployeeCrudRepository repository;
 
   @Override
+  public Employee getOne(Integer id) {
+    return repository.getOne(id);
+  }
+
+  @Override
   public Set<Employee> findAll() {
     return repository.findAll();
   }

@@ -10,11 +10,13 @@ import java.awt.event.ActionListener;
 public class HeaderPanel extends JPanel {
   private final JButton returnButton = new JButton("Return");
   private final JLabel selectedViewTitle = new JLabel("", SwingConstants.CENTER);
+  private final JButton projectButton = new JButton("Projects");
   private final JButton employeeButton = new JButton("Employees");
 
   public HeaderPanel() {
     this.add(returnButton);
     this.add(selectedViewTitle);
+//    this.add(projectButton);
     this.add(employeeButton);
     styleComponents();
   }
@@ -27,7 +29,11 @@ public class HeaderPanel extends JPanel {
     this.employeeButton.addActionListener(listener);
   }
 
-  public void setReturnActionListener(ActionListener listener){
+  public void setProjectActionListener(ActionListener listener) {
+    this.projectButton.addActionListener(listener);
+  }
+
+  public void setReturnActionListener(ActionListener listener) {
     this.returnButton.addActionListener(listener);
   }
 

@@ -35,19 +35,19 @@ class EmployeeCrudRepositoryImplTest {
     return employee;
   }
 
-  @Test
-  @DisplayName("should refresh the relational table for projects on updates")
-  void employeeCrudRepositoryImplTest_6() {
-    Employee employee = saveNewEmployee();
-    Project project = Entities.randomProject();
-    Project anotherProject = Entities.randomProject();
-    projectRepo.save(project);
-    projectRepo.save(anotherProject);
-    employee.assignToProject(anotherProject);
-    employee.assignToProject(project);
-    repository.save(employee);
-    assertThat(repository.getProjectIds(employee)).hasSize(2).containsExactly(1,2);
-  }
+//  @Test
+//  @DisplayName("should refresh the relational table for projects on updates")
+//  void employeeCrudRepositoryImplTest_6() {
+//    Employee employee = saveNewEmployee();
+//    Project project = Entities.randomProject();
+//    Project anotherProject = Entities.randomProject();
+//    projectRepo.save(project);
+//    projectRepo.save(anotherProject);
+//    employee.assignToProject(anotherProject);
+//    employee.assignToProject(project);
+//    repository.save(employee);
+//    assertThat(repository.getProjectIds(employee)).hasSize(2).containsExactly(1,2);
+//  }
 
   @Test
   @DisplayName("should be able to save new Employee")
