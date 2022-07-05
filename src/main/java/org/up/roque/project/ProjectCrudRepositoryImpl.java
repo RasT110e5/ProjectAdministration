@@ -3,21 +3,22 @@ package org.up.roque.project;
 import org.up.roque.db.CrudRepositoryTemplate;
 import org.up.roque.db.DBTemplate;
 import org.up.roque.db.SqlParam;
+import org.up.roque.project.employee.Employee;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ProjectCrudRepositoryImpl extends CrudRepositoryTemplate<Project, Integer> implements ProjectCrudRepository {
   private static final String NAME_COLUMN = "NAME";
   private static final String ID_COLUMN = "ID";
   private static final String TABLE = "PROJECT";
 
+  private final DBTemplate template;
+
   public ProjectCrudRepositoryImpl(DBTemplate dbTemplate) {
     super(dbTemplate, TABLE, Integer.class, ID_COLUMN, NAME_COLUMN);
+    this.template = dbTemplate;
   }
 
   @Override
@@ -42,6 +43,15 @@ public class ProjectCrudRepositoryImpl extends CrudRepositoryTemplate<Project, I
     return rs -> getBaseBuilderParser(rs)
         .id(id)
         .build();
+  }
+
+  @Override
+  protected void refreshRelationalTables(Project entity) {
+    template.delete("DELETE FROM EMPLOYEE_PROJECT WHERE PROJECT=?", getIdAsParam(entity.getId()));
+    for (Employee employee : entity.getEmployees()) {
+      template.save("INSERT INTO EMPLOYEE_PROJECT (PROJECT, EMPLOYEE) VALUES (?,?)",
+          List.of(new SqlParam(entity.getId()), new SqlParam(employee.getId())));
+    }
   }
 
   private Project.ProjectBuilder getBaseBuilderParser(ResultSet rs) throws SQLException {

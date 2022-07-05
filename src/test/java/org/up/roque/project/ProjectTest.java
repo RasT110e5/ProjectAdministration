@@ -18,7 +18,7 @@ class ProjectTest {
   void setUp() {
     project = new Project();
     task = new Task();
-    employee = new Employee();
+    employee = Employee.builder().build();
   }
 
   @Test

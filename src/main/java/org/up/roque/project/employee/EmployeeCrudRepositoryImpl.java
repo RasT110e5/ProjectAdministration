@@ -3,13 +3,13 @@ package org.up.roque.project.employee;
 import org.up.roque.db.CrudRepositoryTemplate;
 import org.up.roque.db.DBTemplate;
 import org.up.roque.db.SqlParam;
+import org.up.roque.project.Project;
+import org.up.roque.project.ProjectCrudRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Set;
 
 public class EmployeeCrudRepositoryImpl extends CrudRepositoryTemplate<Employee, Integer>
     implements EmployeeCrudRepository {
@@ -18,8 +18,11 @@ public class EmployeeCrudRepositoryImpl extends CrudRepositoryTemplate<Employee,
   private static final String ID_COLUMN = "ID";
   private static final String TABLE = "EMPLOYEE";
 
+  private final DBTemplate template;
+
   public EmployeeCrudRepositoryImpl(DBTemplate template) {
     super(template, TABLE, Integer.class, ID_COLUMN, NAME_COLUMN, COST_COLUMN);
+    this.template = template;
   }
 
   @Override
@@ -51,5 +54,22 @@ public class EmployeeCrudRepositoryImpl extends CrudRepositoryTemplate<Employee,
     return Employee.builder()
         .name(rs.getString(NAME_COLUMN))
         .costPerHour(rs.getInt(COST_COLUMN));
+  }
+
+  @Override
+  protected void refreshRelationalTables(Employee entity) {
+    template.delete("DELETE FROM EMPLOYEE_PROJECT WHERE EMPLOYEE=?", getIdAsParam(entity.getId()));
+    for (Project project : entity.getProjects()) {
+      template.save("INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT) VALUES (?,?)",
+          List.of(new SqlParam(entity.getId()), new SqlParam(project.getId())));
+    }
+  }
+
+  public Set<Integer> getProjectIds(Employee entity) {
+    return template.query(
+        "SELECT PROJECT FROM EMPLOYEE_PROJECT WHERE EMPLOYEE = ?",
+        getIdAsParam(entity.getId()),
+        rs -> rs.getInt("PROJECT")
+    );
   }
 }

@@ -61,6 +61,7 @@ public abstract class DBTemplate {
   }
 
   public void delete(String sql, List<SqlParam> params) {
+    log.info("Deleting from DB with: {}", sql);
     try (Transaction transaction = new Transaction(dataSource)) {
       transaction.update(sql, params);
     }

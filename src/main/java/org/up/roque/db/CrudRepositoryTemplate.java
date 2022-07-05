@@ -18,7 +18,8 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> {
 
   private final DBTemplate template;
 
-  protected CrudRepositoryTemplate(DBTemplate template, String table, Class<ID> idClass, String idColumn, String... columns) {
+  protected CrudRepositoryTemplate(DBTemplate template, String table, Class<ID> idClass,
+                                   String idColumn, String... columns) {
     this.template = template;
     this.idClass = idClass;
     this.delete = DELETE_STATEMENT.formatted(table);
@@ -52,11 +53,14 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> {
 
   protected abstract DBTemplate.ResultSetParser<T> getResultSetWithId(ID id);
 
+  protected abstract void refreshRelationalTables(T entity);
+
   public T save(T entity) {
     if (entity.getId() == null)
       insert(entity);
     else
       update(entity);
+    refreshRelationalTables(entity);
     return entity;
   }
 

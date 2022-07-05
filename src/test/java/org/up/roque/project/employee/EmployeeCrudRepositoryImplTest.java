@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.up.roque.db.DataAccessException;
+import org.up.roque.project.Project;
+import org.up.roque.project.ProjectCrudRepositoryImpl;
 import org.up.roque.util.Entities;
 import org.up.roque.util.TestDBTemplate;
 
@@ -12,15 +14,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class EmployeeCrudRepositoryImplTest {
-  TestDBTemplate testDBTemplate = new TestDBTemplate();
-  EmployeeCrudRepositoryImpl repository = new EmployeeCrudRepositoryImpl(testDBTemplate);
+  private final TestDBTemplate testDBTemplate = new TestDBTemplate();
+  private final ProjectCrudRepositoryImpl projectRepo = new ProjectCrudRepositoryImpl(testDBTemplate);
+  private final EmployeeCrudRepositoryImpl repository = new EmployeeCrudRepositoryImpl(testDBTemplate
+  );
 
   @BeforeEach
   public void setup() {
     testDBTemplate.initSchema();
   }
 
-//  @AfterEach
+  @AfterEach
   public void teardown() {
     testDBTemplate.teardown();
   }
@@ -29,6 +33,20 @@ class EmployeeCrudRepositoryImplTest {
     Employee employee = Entities.randomEmployee();
     repository.save(employee);
     return employee;
+  }
+
+  @Test
+  @DisplayName("should refresh the relational table for projects on updates")
+  void employeeCrudRepositoryImplTest_6() {
+    Employee employee = saveNewEmployee();
+    Project project = Entities.randomProject();
+    Project anotherProject = Entities.randomProject();
+    projectRepo.save(project);
+    projectRepo.save(anotherProject);
+    employee.assignToProject(anotherProject);
+    employee.assignToProject(project);
+    repository.save(employee);
+    assertThat(repository.getProjectIds(employee)).hasSize(2).containsExactly(1,2);
   }
 
   @Test

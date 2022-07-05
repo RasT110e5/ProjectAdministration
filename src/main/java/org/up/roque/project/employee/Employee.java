@@ -18,11 +18,8 @@ public class Employee implements PartOfProject, Entity<Integer> {
   private String name;
   private Integer costPerHour;
   @ToString.Exclude
-  private final List<Project> projects;
-
-  public Employee() {
-    this.projects = new ArrayList<>();
-  }
+  @Builder.Default
+  private final List<Project> projects = new ArrayList<>();
 
   @Override
   public boolean isPartOfProject(Project project) {

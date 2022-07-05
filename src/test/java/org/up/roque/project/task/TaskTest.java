@@ -43,7 +43,7 @@ class TaskTest {
   @Test
   @DisplayName("task should have an assigned employee")
   void taskTest_3() {
-    Employee employee = new Employee();
+    Employee employee = Employee.builder().build();
     Task task = new Task();
     task.assignEmployee(employee);
     assertTrue(task.isAssigned());
