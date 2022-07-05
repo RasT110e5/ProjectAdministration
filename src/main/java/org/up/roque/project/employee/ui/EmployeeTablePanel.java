@@ -10,20 +10,18 @@ import javax.swing.*;
 
 public class EmployeeTablePanel extends CustomPanel {
   private final EmployeeTableModel model;
-  private final JTable table;
+  private final EmployeeScrollableTable table;
   private final CRUDButtonComponent buttonsLayout = new CRUDButtonComponent();
 
   public EmployeeTablePanel(MainFrame frame, EmployeeService employeeService) {
     super("Employee Grid", frame);
     this.model = new EmployeeTableModel(frame, employeeService);
-
-    table = new JTable(model);
-    JScrollPane scrollBar = new JScrollPane(table);
+    this.table = new EmployeeScrollableTable(model);
 
     addActionListeners(frame);
 
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-    this.add(scrollBar);
+    this.add(table.getScrollPane());
     this.add(buttonsLayout);
   }
 
@@ -38,6 +36,5 @@ public class EmployeeTablePanel extends CustomPanel {
     if (employee != null)
       frame.showEmployeeEditForm(employee);
   }
-
 
 }
