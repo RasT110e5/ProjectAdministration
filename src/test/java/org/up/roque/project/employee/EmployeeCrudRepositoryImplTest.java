@@ -20,7 +20,7 @@ class EmployeeCrudRepositoryImplTest {
     testDBTemplate.initSchema();
   }
 
-  @AfterEach
+//  @AfterEach
   public void teardown() {
     testDBTemplate.teardown();
   }

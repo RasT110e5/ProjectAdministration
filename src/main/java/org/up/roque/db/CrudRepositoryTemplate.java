@@ -1,18 +1,14 @@
 package org.up.roque.db;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> implements CrudRepository<T, ID> {
+public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> {
   public static final String DELETE_STATEMENT = "DELETE FROM %s WHERE ID=?";
   public static final String SELECT_STATEMENT = "SELECT %s FROM %s";
-  public static final String UPDATE_STATEMENT = "UPDATE %s SET %s=? WHERE %s=?";
+  public static final String UPDATE_STATEMENT = "UPDATE %s SET %s WHERE %s=?";
   public static final String INSERT_STATEMENT = "INSERT INTO %s (%s) VALUES (%s)";
-//  private static final String NAME_COLUMN = "NAME";
-//  private static final String ID_COLUMN = "ID";
 
   private final String select;
   private final String update;
@@ -26,14 +22,22 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> implement
     this.template = template;
     this.idClass = idClass;
     this.delete = DELETE_STATEMENT.formatted(table);
-    this.select = SELECT_STATEMENT.formatted(idColumn + "," + String.join(",", columns), table);
-    this.update = UPDATE_STATEMENT.formatted(table,
-        formatColumnsForUpdate(columns)
-        , idColumn);
-    this.insert = INSERT_STATEMENT.formatted(table,
-        String.join(",", columns),
-        Arrays.stream(columns).map(c -> "?").collect(Collectors.joining(","))
-    );
+    this.select = SELECT_STATEMENT.formatted(formatColumnsForSelect(idColumn, columns), table);
+    this.update = UPDATE_STATEMENT.formatted(table, formatColumnsForUpdate(columns), idColumn);
+    this.insert = INSERT_STATEMENT.formatted(table, formatColumnsForInsert(columns),
+        addNecessaryParametersPlaceholders(columns));
+  }
+
+  private String addNecessaryParametersPlaceholders(String[] columns) {
+    return Arrays.stream(columns).map(c -> "?").collect(Collectors.joining(","));
+  }
+
+  private String formatColumnsForInsert(String[] columns) {
+    return String.join(",", columns);
+  }
+
+  private String formatColumnsForSelect(String idColumn, String[] columns) {
+    return idColumn + "," + String.join(",", columns);
   }
 
   private String formatColumnsForUpdate(String[] columns) {
@@ -44,13 +48,10 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> implement
 
   protected abstract List<SqlParam> getIdAsParam(ID id);
 
-  protected abstract List<SqlParam> getAllPropertiesAsParam(T entity);
-
   protected abstract DBTemplate.ResultSetParser<T> getResultSetParser();
 
   protected abstract DBTemplate.ResultSetParser<T> getResultSetWithId(ID id);
 
-  @Override
   public T save(T entity) {
     if (entity.getId() == null)
       insert(entity);
@@ -68,22 +69,25 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> implement
     entity.setId(id);
   }
 
-  @Override
+  private List<SqlParam> getAllPropertiesAsParam(T entity) {
+    return Stream.of(getPropertiesAsParam(entity), getIdAsParam(entity.getId()))
+        .flatMap(Collection::stream)
+        .collect(Collectors.toList());
+  }
+
   public void delete(ID id) {
     template.delete(delete, getIdAsParam(id));
   }
 
-  @Override
   public Set<T> findAll() {
     return template.query(select, getResultSetParser());
   }
 
-  @Override
   public T getOne(ID id) {
     try {
       return template.query(select + " WHERE ID=?", getIdAsParam(id), getResultSetWithId(id)).iterator().next();
     } catch (NoSuchElementException e) {
-      throw new DataAccessException("No employee found for ID=%s".formatted(id));
+      throw new DataAccessException("No entity found for ID=%s".formatted(id));
     }
   }
 }
