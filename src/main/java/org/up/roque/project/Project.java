@@ -43,4 +43,9 @@ public class Project implements Entity<Integer> {
     employee.removeFromProject(this);
     this.employees.remove(employee);
   }
+
+  public void setEmployees(List<Employee> employees){
+    this.employees.clear();
+    this.employees.addAll(employees);
+  }
 }

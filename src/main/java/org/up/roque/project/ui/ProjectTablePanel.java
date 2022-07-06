@@ -29,12 +29,12 @@ public class ProjectTablePanel extends CustomPanel {
   private void addActionListeners(MainFrame frame) {
     buttonsLayout.addActionListenerToDelete(e -> table.deleteSelectedItem());
     buttonsLayout.addActionListenerToAdd(e -> frame.showProjectCreateForm());
-//    buttonsLayout.addActionListenerToEdit(e -> showProjectEditForm());
+    buttonsLayout.addActionListenerToEdit(e -> showProjectEditForm());
   }
 
   private void showProjectEditForm() {
-//    Project project = model.getRow(table.getSelectedRow());
-//    if (project != null)
-//      frame.showEmployeeEditForm(project);
+    Project project = table.getSelectedItem();
+    if (project != null)
+      frame.showProjectEditForm(project);
   }
 }

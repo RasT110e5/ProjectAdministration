@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.up.roque.project.ProcessingException;
 import org.up.roque.project.Project;
 import org.up.roque.project.ProjectService;
+import org.up.roque.project.Service;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.employee.ui.EmployeeTableModel;
@@ -19,7 +20,7 @@ public class ProjectForm extends CustomPanel {
   private final ScrollableJTable<Employee> employeeTable;
   protected final JButton saveButton = new JButton("Save");
 
-  public ProjectForm(String title, MainFrame frame, ProjectService service, EmployeeService employeeService) {
+  public ProjectForm(String title, MainFrame frame, ProjectService service, Service<Employee> employeeService) {
     super(title, frame);
     this.service = service;
     this.add(name);

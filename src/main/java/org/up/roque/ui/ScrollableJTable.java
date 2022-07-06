@@ -6,6 +6,7 @@ import org.up.roque.db.Entity;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ScrollableJTable<E extends Entity<?>> extends JTable {
   @Getter
@@ -33,5 +34,14 @@ public class ScrollableJTable<E extends Entity<?>> extends JTable {
       entities.add(model.getRow(row));
     }
     return entities;
+  }
+
+  public void selectRowsWithId(List<E> entities) {
+    List<?> ids = entities.stream().map(Entity::getId).collect(Collectors.toList());
+    for (int i = 0; i < super.getRowCount(); i++) {
+      E entity = model.getRow(i);
+      if (ids.contains(entity.getId()))
+        super.addRowSelectionInterval(i, i);
+    }
   }
 }
