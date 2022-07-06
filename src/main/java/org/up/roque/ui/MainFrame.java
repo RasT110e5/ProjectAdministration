@@ -27,6 +27,7 @@ public class MainFrame extends WindowAdapter {
   private final HomePanelPlaceholder homePanel = new HomePanelPlaceholder(this);
   private final HeaderPanel headerPanel = new HeaderPanel();
 
+  private CustomPanel previousPanel;
   private EmployeeService employeeService;
   private ProjectService projectService;
   private boolean running;
@@ -41,6 +42,7 @@ public class MainFrame extends WindowAdapter {
     styleFrame();
     setHeader();
 
+    previousPanel = homePanel;
     mainPanel.add(homePanel);
     jFrame.setVisible(true);
     this.running = true;
@@ -48,10 +50,14 @@ public class MainFrame extends WindowAdapter {
 
   private void setHeader() {
     headerPanel.setTitle(homePanel.getTitle());
-    headerPanel.setReturnActionListener(e -> showHome());
+    headerPanel.setReturnActionListener(e -> showReturn());
     headerPanel.setEmployeeActionListener(e -> showEmployeeView());
     headerPanel.setProjectActionListener(e -> showProjectView());
     mainPanel.add(headerPanel);
+  }
+
+  private void showReturn() {
+    navigate(previousPanel);
   }
 
   public void showProjectView() {
@@ -83,6 +89,7 @@ public class MainFrame extends WindowAdapter {
   }
 
   private void navigate(CustomPanel navigateTo) {
+    previousPanel = (CustomPanel) mainPanel.getComponent(1);
     mainPanel.remove(1);
     mainPanel.add(navigateTo);
     headerPanel.setTitle(navigateTo.getTitle());
