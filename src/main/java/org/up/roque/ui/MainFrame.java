@@ -10,6 +10,7 @@ import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.employee.ui.EmployeeTablePanel;
 import org.up.roque.project.employee.ui.form.CreateEmployeeForm;
 import org.up.roque.project.employee.ui.form.EditEmployeeForm;
+import org.up.roque.project.ui.ProjectStatusPanel;
 import org.up.roque.project.ui.ProjectTablePanel;
 import org.up.roque.project.ui.form.CreateProjectForm;
 import org.up.roque.project.ui.form.EditProjectForm;
@@ -89,6 +90,10 @@ public class MainFrame extends WindowAdapter {
 
   public void showEmployeeEditForm(Employee employee) {
     navigate(new EditEmployeeForm(this, employeeService, employee));
+  }
+
+  public void showProjectStatusView(Project project) {
+    navigate(new ProjectStatusPanel(this, project));
   }
 
   private void navigate(CustomPanel navigateTo) {

@@ -40,7 +40,7 @@ public abstract class DBTemplate {
     if (rs.next())
       return rs.getObject(1, idType);
     else
-      throw new DataAccessException("No row was returned on insert, Id should've been returned");
+      throw new DataAccessException("No row was returned on insert, It should've been returned");
   }
 
   public void update(String sql) {

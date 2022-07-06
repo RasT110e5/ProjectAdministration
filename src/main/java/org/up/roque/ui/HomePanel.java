@@ -33,7 +33,7 @@ public class HomePanel extends CustomPanel {
 
   private void addProjectLink(Project project) {
     JLabel label = new JLabel("<HTML><U>%s</U></HTML>".formatted(project.getName()), SwingConstants.CENTER);
-    label.addMouseListener(new OnClickActionListener(() -> this.frame.showProjectEditForm(project)));
+    label.addMouseListener(new OnClickActionListener(() -> this.frame.showProjectStatusView(project)));
     styleLabel(label);
     addLinkLabel(label);
   }
