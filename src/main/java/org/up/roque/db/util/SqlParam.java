@@ -4,6 +4,8 @@ import lombok.Value;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Value
 public class SqlParam {
@@ -17,6 +19,11 @@ public class SqlParam {
 
   public SqlParam(Integer val) {
     this.type = ParameterType.INTEGER;
+    this.value = val;
+  }
+
+  public SqlParam(LocalDateTime val) {
+    this.type = ParameterType.TIMESTAMP;
     this.value = val;
   }
 
@@ -35,6 +42,12 @@ public class SqlParam {
       @Override
       public void setInPreparedStatement(PreparedStatement s, int index, Object val) throws SQLException {
         s.setInt(index, (Integer) val);
+      }
+    },
+    TIMESTAMP {
+      @Override
+      public void setInPreparedStatement(PreparedStatement s, int index, Object val) throws SQLException {
+        s.setTimestamp(index, Timestamp.valueOf((LocalDateTime) val));
       }
     };
 

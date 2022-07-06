@@ -5,8 +5,6 @@ import org.up.roque.db.Entity;
 import org.up.roque.project.util.ProcessingException;
 import org.up.roque.project.util.Service;
 import org.up.roque.ui.MainFrame;
-import org.up.roque.ui.util.DialogUtils;
-import org.up.roque.ui.util.TableColumn;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;

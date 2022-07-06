@@ -93,7 +93,6 @@ public abstract class DBTemplate {
     return entities;
   }
 
-
   public interface ResultSetParser<T> {
     T parseRows(ResultSet rs) throws SQLException;
   }

@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class TaskTest {
 
   private Task createTaskWithComment(String content) {
-    Task task = new Task();
+    Task task = Task.builder().build();
     task.comment(content);
     return task;
   }
@@ -45,7 +45,7 @@ class TaskTest {
   @DisplayName("task should have an assigned employee")
   void taskTest_3() {
     Employee employee = Employee.builder().build();
-    Task task = new Task();
+    Task task = Task.builder().build();
     task.assignEmployee(employee);
     assertTrue(task.isAssigned());
     assertEquals(employee, task.getAssignedEmployee());

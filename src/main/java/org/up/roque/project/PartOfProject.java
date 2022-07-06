@@ -1,6 +1,4 @@
-package org.up.roque.project.util;
-
-import org.up.roque.project.Project;
+package org.up.roque.project;
 
 public interface PartOfProject {
   boolean isPartOfProject(Project project);

@@ -1,24 +1,33 @@
 package org.up.roque.project.task;
 
-import lombok.Getter;
+import lombok.*;
+import org.up.roque.db.Entity;
+import org.up.roque.project.PartOfProject;
 import org.up.roque.project.Project;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.task.comment.Comment;
-import org.up.roque.project.util.PartOfProject;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Task implements PartOfProject {
-  @Getter
-  private Employee assignedEmployee;
+@Data
+@Builder
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Task implements PartOfProject, Entity<Integer> {
+  @EqualsAndHashCode.Include
+  private Integer id;
+  private String name;
+  private String description;
+  private Integer estimatedHours;
+  private LocalDateTime createdDate;
+  private Integer actualDuration;
   private Project project;
-  @Getter
-  private final List<Comment> comments;
-
-  public Task(){
-    this.comments = new ArrayList<>();
-  }
+  private Employee assignedEmployee;
+  @ToString.Exclude
+  @Builder.Default
+  private final List<Comment> comments = new ArrayList<>();
 
   @Override
   public boolean isPartOfProject(Project project) {

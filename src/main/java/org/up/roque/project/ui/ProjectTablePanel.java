@@ -3,10 +3,10 @@ package org.up.roque.project.ui;
 import org.up.roque.project.Project;
 import org.up.roque.project.ProjectService;
 import org.up.roque.project.ui.util.ProjectTableModel;
-import org.up.roque.ui.custom.CRUDButtonComponent;
-import org.up.roque.ui.util.CustomPanel;
 import org.up.roque.ui.MainFrame;
+import org.up.roque.ui.custom.CRUDButtonComponent;
 import org.up.roque.ui.custom.ScrollableJTable;
+import org.up.roque.ui.util.CustomPanel;
 
 import javax.swing.*;
 

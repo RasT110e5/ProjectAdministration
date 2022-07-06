@@ -14,7 +14,7 @@ class DBTemplateTest {
   void dbTemplate_() {
     try {
       manager.initSchema();
-      manager.isHealthy();
+      manager.healthCheck();
       manager.teardown();
     } catch (Exception e) {
       fail("Schema initiation shouldn't throw any exceptions while testing", e);
