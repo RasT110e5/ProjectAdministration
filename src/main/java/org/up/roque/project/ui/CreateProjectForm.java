@@ -15,6 +15,7 @@ public class CreateProjectForm extends ProjectForm {
   private void save() {
     submit(Project.builder()
         .name(super.getNameContent())
+        .employees(super.getEmployeeTable().getSelectedItems())
         .build());
   }
 

@@ -16,7 +16,7 @@ class ProjectTest {
 
   @BeforeEach
   void setUp() {
-    project = new Project();
+    project = Project.builder().build();
     task = new Task();
     employee = Employee.builder().build();
   }
