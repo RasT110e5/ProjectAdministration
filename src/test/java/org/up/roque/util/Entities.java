@@ -39,6 +39,8 @@ public abstract class Entities {
         .estimatedHours(estimatedHours)
         .createdDate(LocalDateTime.now().minus(nextInt(0, 73), ChronoUnit.HOURS))
         .actualDuration(estimatedHours + nextInt(0, 10))
+        .project(randomProject())
+        .assignedEmployee(randomEmployee())
         .build();
   }
 }

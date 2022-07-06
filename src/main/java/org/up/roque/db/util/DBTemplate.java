@@ -106,7 +106,7 @@ public abstract class DBTemplate {
         conn.setAutoCommit(false);
         this.connection = conn;
       } catch (SQLException e) {
-        throw new RuntimeException(e);
+        throw new DataAccessException(e);
       }
     }
 
@@ -117,7 +117,7 @@ public abstract class DBTemplate {
         statement.executeUpdate();
         return statement.getGeneratedKeys();
       } catch (SQLException e) {
-        throw new RuntimeException(e);
+        throw new DataAccessException(e);
       }
     }
 
@@ -130,7 +130,7 @@ public abstract class DBTemplate {
         setParameters(statement, params);
         statement.executeUpdate();
       } catch (SQLException e) {
-        throw new RuntimeException(e);
+        throw new DataAccessException(e);
       }
     }
 
@@ -138,7 +138,7 @@ public abstract class DBTemplate {
       try (Statement statement = connection.createStatement()) {
         statement.executeUpdate(sql);
       } catch (SQLException e) {
-        throw new RuntimeException(e);
+        throw new DataAccessException(e);
       }
     }
 
@@ -148,7 +148,7 @@ public abstract class DBTemplate {
         setParameters(statement, params);
         return statement.executeQuery();
       } catch (SQLException e) {
-        throw new RuntimeException(e);
+        throw new DataAccessException(e);
       }
     }
 
@@ -157,7 +157,7 @@ public abstract class DBTemplate {
         Statement statement = connection.createStatement();
         return statement.executeQuery(sql);
       } catch (SQLException e) {
-        throw new RuntimeException(e);
+        throw new DataAccessException(e);
       }
     }
 
@@ -167,7 +167,7 @@ public abstract class DBTemplate {
         connection.commit();
         connection.close();
       } catch (SQLException e) {
-        throw new RuntimeException(e);
+        throw new DataAccessException(e);
       }
     }
 

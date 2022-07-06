@@ -5,6 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.up.roque.db.DataAccessException;
+import org.up.roque.project.ProjectCrudRepository;
+import org.up.roque.project.ProjectCrudRepositoryImpl;
+import org.up.roque.project.employee.EmployeeCrudRepository;
+import org.up.roque.project.employee.EmployeeCrudRepositoryImpl;
 import org.up.roque.project.task.Task;
 import org.up.roque.util.Entities;
 import org.up.roque.util.TestDBTemplate;
@@ -12,9 +16,11 @@ import org.up.roque.util.TestDBTemplate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class TaskCrudRepositoryImplTest {
+class TaskCrudRepositoryImplTest {
   TestDBTemplate testDBTemplate = new TestDBTemplate();
-  TaskCrudRepository repository = new TaskCrudRepositoryImpl(testDBTemplate);
+  EmployeeCrudRepository employeeRepo = new EmployeeCrudRepositoryImpl(testDBTemplate);
+  ProjectCrudRepository projectRepo = new ProjectCrudRepositoryImpl(testDBTemplate);
+  TaskCrudRepository repository = new TaskCrudRepositoryImpl(testDBTemplate, projectRepo, employeeRepo);
 
   @BeforeEach
   public void setup() {
@@ -28,6 +34,8 @@ public class TaskCrudRepositoryImplTest {
 
   private Task saveNewTask() {
     Task entity = Entities.randomTask();
+    projectRepo.save(entity.getProject());
+    employeeRepo.save(entity.getAssignedEmployee());
     return repository.save(entity);
   }
 

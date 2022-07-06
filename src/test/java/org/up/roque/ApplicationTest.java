@@ -23,7 +23,7 @@ class ApplicationTest {
     when(mainFrame.isRunning()).thenReturn(true, false);
     Application application = new Application(mainFrame);
     int status = SystemLambda.catchSystemExit(application::run);
-    assertThat(status).isEqualTo(0);
+    assertThat(status).isZero();
   }
 
 }

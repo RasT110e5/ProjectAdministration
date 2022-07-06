@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.up.roque.db.util.CrudRepositoryTemplate;
 import org.up.roque.db.util.DBTemplate;
 import org.up.roque.db.util.SqlParam;
+import org.up.roque.project.ProjectCrudRepository;
+import org.up.roque.project.employee.EmployeeCrudRepository;
 import org.up.roque.project.task.Task;
 
 import java.sql.ResultSet;
@@ -20,14 +22,18 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
   public static final String ESTIMATED_HOURS_COLUMN = "ESTIMATED_HOURS";
   public static final String CREATED_DATE_COLUMN = "CREATED_DATE";
   public static final String ACTUAL_DURATION_COLUMN = "ACTUAL_DURATION";
+  public static final String ASSIGNED_EMPLOYEE_COLUMN = "ASSIGNED_EMPLOYEE";
+  public static final String PROJECT_COLUMN = "PROJECT";
 
-  public TaskCrudRepositoryImpl(DBTemplate template) {
-    super(template, TASK, Integer.class, ID_COLUMN,
-        NAME_COLUMN,
-        DESCRIPTION_COLUMN,
-        ESTIMATED_HOURS_COLUMN,
-        CREATED_DATE_COLUMN,
-        ACTUAL_DURATION_COLUMN);
+  private final ProjectCrudRepository projectRepo;
+  private final EmployeeCrudRepository employeeRepo;
+
+  public TaskCrudRepositoryImpl(DBTemplate template, ProjectCrudRepository projectRepo, EmployeeCrudRepository employeeRepo) {
+    super(template, TASK, Integer.class, ID_COLUMN, NAME_COLUMN, DESCRIPTION_COLUMN,
+        ESTIMATED_HOURS_COLUMN, CREATED_DATE_COLUMN, ACTUAL_DURATION_COLUMN,
+        PROJECT_COLUMN, ASSIGNED_EMPLOYEE_COLUMN);
+    this.projectRepo = projectRepo;
+    this.employeeRepo = employeeRepo;
   }
 
   @Override
@@ -37,7 +43,9 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
         new SqlParam(entity.getDescription()),
         new SqlParam(entity.getEstimatedHours()),
         new SqlParam(entity.getCreatedDate()),
-        new SqlParam(entity.getActualDuration())
+        new SqlParam(entity.getActualDuration()),
+        new SqlParam(entity.getProject().getId()),
+        new SqlParam(entity.getAssignedEmployee().getId())
     );
   }
 
@@ -66,7 +74,9 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
         .description(rs.getString(DESCRIPTION_COLUMN))
         .estimatedHours(rs.getInt(ESTIMATED_HOURS_COLUMN))
         .createdDate(rs.getTimestamp(CREATED_DATE_COLUMN).toLocalDateTime())
-        .actualDuration(rs.getInt(ACTUAL_DURATION_COLUMN));
+        .actualDuration(rs.getInt(ACTUAL_DURATION_COLUMN))
+        .project(projectRepo.getOne(rs.getInt(PROJECT_COLUMN)))
+        .assignedEmployee(employeeRepo.getOne(rs.getInt(ASSIGNED_EMPLOYEE_COLUMN)));
   }
 
   @Override
