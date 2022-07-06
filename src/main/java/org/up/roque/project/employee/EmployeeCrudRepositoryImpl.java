@@ -1,9 +1,9 @@
 package org.up.roque.project.employee;
 
 import lombok.extern.slf4j.Slf4j;
-import org.up.roque.db.CrudRepositoryTemplate;
-import org.up.roque.db.DBTemplate;
-import org.up.roque.db.SqlParam;
+import org.up.roque.db.util.CrudRepositoryTemplate;
+import org.up.roque.db.util.DBTemplate;
+import org.up.roque.db.util.SqlParam;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

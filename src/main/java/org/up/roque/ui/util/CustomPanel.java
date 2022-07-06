@@ -1,6 +1,7 @@
-package org.up.roque.ui;
+package org.up.roque.ui.util;
 
 import lombok.Getter;
+import org.up.roque.ui.MainFrame;
 
 import javax.swing.*;
 

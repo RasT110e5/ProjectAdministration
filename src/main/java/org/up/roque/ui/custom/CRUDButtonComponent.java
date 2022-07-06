@@ -1,4 +1,4 @@
-package org.up.roque.ui;
+package org.up.roque.ui.custom;
 
 import javax.swing.*;
 import java.awt.*;

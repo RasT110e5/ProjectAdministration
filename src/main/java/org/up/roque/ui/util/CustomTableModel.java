@@ -1,16 +1,19 @@
-package org.up.roque.ui;
+package org.up.roque.ui.util;
 
 import lombok.Setter;
 import org.up.roque.db.Entity;
 import org.up.roque.project.util.ProcessingException;
 import org.up.roque.project.util.Service;
+import org.up.roque.ui.MainFrame;
+import org.up.roque.ui.util.DialogUtils;
+import org.up.roque.ui.util.TableColumn;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomTableModel<T extends Entity<ID>, ID> extends AbstractTableModel {
+public abstract class CustomTableModel<T extends Entity<ID>, ID> extends AbstractTableModel {
   private final JFrame parentFrame;
   private final List<T> items;
   private final Service<T, ID> service;

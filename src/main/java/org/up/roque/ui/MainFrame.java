@@ -7,12 +7,13 @@ import org.up.roque.project.Project;
 import org.up.roque.project.ProjectService;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
-import org.up.roque.project.employee.ui.CreateEmployeeForm;
-import org.up.roque.project.employee.ui.EditEmployeeForm;
+import org.up.roque.project.employee.ui.form.CreateEmployeeForm;
+import org.up.roque.project.employee.ui.form.EditEmployeeForm;
 import org.up.roque.project.employee.ui.EmployeeTablePanel;
-import org.up.roque.project.ui.CreateProjectForm;
-import org.up.roque.project.ui.EditProjectForm;
+import org.up.roque.project.ui.form.CreateProjectForm;
+import org.up.roque.project.ui.form.EditProjectForm;
 import org.up.roque.project.ui.ProjectTablePanel;
+import org.up.roque.ui.util.CustomPanel;
 
 import javax.swing.*;
 import java.awt.*;

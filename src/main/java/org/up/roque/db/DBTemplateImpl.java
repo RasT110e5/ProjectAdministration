@@ -2,6 +2,7 @@ package org.up.roque.db;
 
 import lombok.extern.slf4j.Slf4j;
 import org.h2.jdbcx.JdbcDataSource;
+import org.up.roque.db.util.DBTemplate;
 
 import java.io.File;
 import java.io.IOException;

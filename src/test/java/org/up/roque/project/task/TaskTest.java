@@ -3,6 +3,7 @@ package org.up.roque.project.task;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.up.roque.project.employee.Employee;
+import org.up.roque.project.task.comment.Comment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,17 +1,17 @@
-package org.up.roque.project.employee.ui;
+package org.up.roque.project.employee.ui.form;
 
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.util.ProcessingException;
-import org.up.roque.ui.CustomPanel;
-import org.up.roque.ui.DialogUtils;
+import org.up.roque.ui.util.CustomPanel;
+import org.up.roque.ui.util.DialogUtils;
 import org.up.roque.ui.MainFrame;
-import org.up.roque.ui.NamedTextFieldPanel;
+import org.up.roque.ui.custom.NamedTextFieldPanel;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class EmployeeForm extends CustomPanel {
+public abstract class EmployeeForm extends CustomPanel {
   private final EmployeeService service;
   private final NamedTextFieldPanel name = new NamedTextFieldPanel("Name");
   private final NamedTextFieldPanel costPerHour = new NamedTextFieldPanel("Cost per hour");

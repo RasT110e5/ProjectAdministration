@@ -1,7 +1,8 @@
-package org.up.roque.ui;
+package org.up.roque.ui.custom;
 
 import lombok.Getter;
 import org.up.roque.db.Entity;
+import org.up.roque.ui.util.CustomTableModel;
 
 import javax.swing.*;
 import java.util.ArrayList;

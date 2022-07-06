@@ -3,6 +3,7 @@ package org.up.roque.project.task;
 import lombok.Getter;
 import org.up.roque.project.Project;
 import org.up.roque.project.employee.Employee;
+import org.up.roque.project.task.comment.Comment;
 import org.up.roque.project.util.PartOfProject;
 
 import java.util.ArrayList;

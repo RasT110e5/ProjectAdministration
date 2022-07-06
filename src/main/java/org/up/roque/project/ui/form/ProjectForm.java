@@ -1,13 +1,17 @@
-package org.up.roque.project.ui;
+package org.up.roque.project.ui.form;
 
 import lombok.Getter;
 import org.up.roque.project.Project;
 import org.up.roque.project.ProjectService;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
-import org.up.roque.project.employee.ui.EmployeeTableModel;
+import org.up.roque.project.employee.ui.util.EmployeeTableModel;
 import org.up.roque.project.util.ProcessingException;
 import org.up.roque.ui.*;
+import org.up.roque.ui.custom.NamedTextFieldPanel;
+import org.up.roque.ui.custom.ScrollableJTable;
+import org.up.roque.ui.util.CustomPanel;
+import org.up.roque.ui.util.DialogUtils;
 
 import javax.swing.*;
 import java.awt.*;

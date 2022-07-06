@@ -3,7 +3,7 @@ package org.up.roque.util;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.h2.jdbcx.JdbcDataSource;
-import org.up.roque.db.DBTemplate;
+import org.up.roque.db.util.DBTemplate;
 import org.up.roque.db.DataAccessException;
 
 import java.io.File;

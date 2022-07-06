@@ -2,6 +2,7 @@ package org.up.roque.project.task;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.up.roque.project.task.comment.Comment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

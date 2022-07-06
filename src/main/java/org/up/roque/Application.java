@@ -2,7 +2,7 @@ package org.up.roque;
 
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
-import org.up.roque.db.DBTemplate;
+import org.up.roque.db.util.DBTemplate;
 import org.up.roque.db.DBTemplateImpl;
 import org.up.roque.project.ProjectCrudRepositoryImpl;
 import org.up.roque.project.ProjectService;

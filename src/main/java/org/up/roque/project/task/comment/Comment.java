@@ -1,8 +1,9 @@
-package org.up.roque.project.task;
+package org.up.roque.project.task.comment;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import org.up.roque.project.task.Task;
 
 
 @EqualsAndHashCode

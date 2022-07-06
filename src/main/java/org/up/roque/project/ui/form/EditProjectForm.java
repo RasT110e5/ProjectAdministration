@@ -1,4 +1,4 @@
-package org.up.roque.project.ui;
+package org.up.roque.project.ui.form;
 
 import org.up.roque.project.Project;
 import org.up.roque.project.ProjectService;

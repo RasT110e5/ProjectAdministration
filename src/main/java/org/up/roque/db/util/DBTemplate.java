@@ -1,6 +1,7 @@
-package org.up.roque.db;
+package org.up.roque.db.util;
 
 import lombok.extern.slf4j.Slf4j;
+import org.up.roque.db.DataAccessException;
 
 import javax.sql.DataSource;
 import java.sql.*;

@@ -1,4 +1,4 @@
-package org.up.roque.db;
+package org.up.roque.db.util;
 
 import lombok.Value;
 

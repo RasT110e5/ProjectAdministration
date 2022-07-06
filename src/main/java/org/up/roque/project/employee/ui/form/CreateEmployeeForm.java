@@ -1,4 +1,4 @@
-package org.up.roque.project.employee.ui;
+package org.up.roque.project.employee.ui.form;
 
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;

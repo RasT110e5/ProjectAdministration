@@ -1,8 +1,8 @@
 package org.up.roque.project;
 
-import org.up.roque.db.CrudRepositoryTemplate;
-import org.up.roque.db.DBTemplate;
-import org.up.roque.db.SqlParam;
+import org.up.roque.db.util.CrudRepositoryTemplate;
+import org.up.roque.db.util.DBTemplate;
+import org.up.roque.db.util.SqlParam;
 import org.up.roque.project.employee.Employee;
 
 import java.sql.ResultSet;

@@ -1,10 +1,10 @@
-package org.up.roque.project.employee.ui;
+package org.up.roque.project.employee.ui.util;
 
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
-import org.up.roque.ui.CustomTableModel;
+import org.up.roque.ui.util.CustomTableModel;
 import org.up.roque.ui.MainFrame;
-import org.up.roque.ui.TableColumn;
+import org.up.roque.ui.util.TableColumn;
 
 import java.util.ArrayList;
 import java.util.List;

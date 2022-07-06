@@ -2,10 +2,11 @@ package org.up.roque.project.employee.ui;
 
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
-import org.up.roque.ui.CRUDButtonComponent;
-import org.up.roque.ui.CustomPanel;
+import org.up.roque.project.employee.ui.util.EmployeeTableModel;
+import org.up.roque.ui.custom.CRUDButtonComponent;
+import org.up.roque.ui.util.CustomPanel;
 import org.up.roque.ui.MainFrame;
-import org.up.roque.ui.ScrollableJTable;
+import org.up.roque.ui.custom.ScrollableJTable;
 
 import javax.swing.*;
 
