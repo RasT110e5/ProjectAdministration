@@ -1,6 +1,7 @@
 package org.up.roque;
 
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.up.roque.db.DBTemplateImpl;
 import org.up.roque.db.util.DBTemplate;
@@ -22,8 +23,8 @@ public class Application {
   @Getter
   private ProjectService projectService;
 
-  public Application(MainFrame frame) {
-    this.frame = frame;
+  public Application() {
+    this.frame = new MainFrame();
     this.dbTemplate = new DBTemplateImpl();
   }
 

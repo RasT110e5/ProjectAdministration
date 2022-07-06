@@ -10,6 +10,8 @@ import org.up.roque.project.ProjectCrudRepositoryImpl;
 import org.up.roque.project.employee.EmployeeCrudRepository;
 import org.up.roque.project.employee.EmployeeCrudRepositoryImpl;
 import org.up.roque.project.task.Task;
+import org.up.roque.project.task.TaskCrudRepository;
+import org.up.roque.project.task.TaskCrudRepositoryImpl;
 import org.up.roque.util.Entities;
 import org.up.roque.util.TestDBTemplate;
 

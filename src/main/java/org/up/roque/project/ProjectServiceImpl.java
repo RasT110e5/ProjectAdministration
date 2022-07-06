@@ -10,12 +10,12 @@ import java.util.Set;
 
 @Slf4j
 public class ProjectServiceImpl extends ServiceTemplate<Project, Integer> implements ProjectService {
-  private final ProjectCrudRepository repository;
+  private final ProjectCrudRepository projectRepository;
   private final EmployeeService employeeService;
 
   public ProjectServiceImpl(ProjectCrudRepository repository, EmployeeService employeeService) {
     super(repository);
-    this.repository = repository;
+    this.projectRepository = repository;
     this.employeeService = employeeService;
   }
 
@@ -23,7 +23,7 @@ public class ProjectServiceImpl extends ServiceTemplate<Project, Integer> implem
   public Set<Project> findAll() {
     log.info("Fetching all projects");
     try {
-      Set<Project> projects = repository.findAll();
+      Set<Project> projects = projectRepository.findAll();
       getEmployeeForProjects(projects);
       return projects;
     } catch (DataAccessException e) {
@@ -33,10 +33,15 @@ public class ProjectServiceImpl extends ServiceTemplate<Project, Integer> implem
   }
 
   private void getEmployeeForProjects(Set<Project> projects) {
-    for (Project project : projects) addEmployeesToProject(project, repository.getEmployeeIds(project));
+    for (Project project : projects) addEmployeesToProject(project, projectRepository.getEmployeeIds(project));
   }
 
   private void addEmployeesToProject(Project project, Set<Integer> employeeIds) {
     for (Integer employeeId : employeeIds) project.assign(employeeService.getById(employeeId));
+  }
+
+  @Override
+  public Set<Project> findAllProjectsWithoutRelatedEntities() {
+    return repository.findAll();
   }
 }

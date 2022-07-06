@@ -24,11 +24,11 @@ import java.awt.event.WindowEvent;
 public class MainFrame extends WindowAdapter {
   @Getter
   private final JFrame jFrame = new JFrame("Project Administration");
-  public final JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-  private final HomePanelPlaceholder homePanel = new HomePanelPlaceholder(this);
+  private final JPanel mainPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
   private final HeaderPanel headerPanel = new HeaderPanel();
 
   private CustomPanel previousPanel;
+  private HomePanel homePanel;
   private EmployeeService employeeService;
   private ProjectService projectService;
   private boolean running;
@@ -39,6 +39,7 @@ public class MainFrame extends WindowAdapter {
   }
 
   public void show() {
+    homePanel = new HomePanel(this, projectService);
     setUpFrame();
     styleFrame();
     setHeader();
@@ -54,6 +55,7 @@ public class MainFrame extends WindowAdapter {
     headerPanel.setReturnActionListener(e -> showReturn());
     headerPanel.setEmployeeActionListener(e -> showEmployeeView());
     headerPanel.setProjectActionListener(e -> showProjectView());
+    headerPanel.setHomeActionListener(e -> showHome());
     mainPanel.add(headerPanel);
   }
 
@@ -74,7 +76,7 @@ public class MainFrame extends WindowAdapter {
   }
 
   public void showHome() {
-    navigate(homePanel);
+    navigate(new HomePanel(this, projectService));
   }
 
   public void showEmployeeView() {
