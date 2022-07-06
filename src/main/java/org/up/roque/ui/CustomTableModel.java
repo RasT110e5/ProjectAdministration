@@ -2,24 +2,23 @@ package org.up.roque.ui;
 
 import lombok.Setter;
 import org.up.roque.db.Entity;
-import org.up.roque.project.ProcessingException;
-import org.up.roque.project.Project;
-import org.up.roque.project.Service;
+import org.up.roque.project.util.ProcessingException;
+import org.up.roque.project.util.Service;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomTableModel<T extends Entity<?>> extends AbstractTableModel {
+public class CustomTableModel<T extends Entity<ID>, ID> extends AbstractTableModel {
   private final JFrame parentFrame;
   private final List<T> items;
-  private final Service<T> service;
+  private final Service<T, ID> service;
 
   @Setter
   private List<TableColumn<?, T>> columns = new ArrayList<>();
 
-  public CustomTableModel(MainFrame frame, Service<T> service) {
+  public CustomTableModel(MainFrame frame, Service<T, ID> service) {
     this.parentFrame = frame.getJFrame();
     this.service = service;
     this.items = new ArrayList<>(service.findAll());

@@ -3,20 +3,19 @@ package org.up.roque.project.employee.ui;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.ui.CRUDButtonComponent;
-import org.up.roque.ui.ScrollableJTable;
 import org.up.roque.ui.CustomPanel;
 import org.up.roque.ui.MainFrame;
+import org.up.roque.ui.ScrollableJTable;
 
 import javax.swing.*;
 
 public class EmployeeTablePanel extends CustomPanel {
-  private final EmployeeTableModel model;
-  private final ScrollableJTable<Employee> table;
+  private final ScrollableJTable<Employee, Integer> table;
   private final CRUDButtonComponent buttonsLayout = new CRUDButtonComponent();
 
   public EmployeeTablePanel(MainFrame frame, EmployeeService employeeService) {
     super("Employee Panel", frame);
-    this.model = new EmployeeTableModel(frame, employeeService);
+    EmployeeTableModel model = new EmployeeTableModel(frame, employeeService);
     this.table = new ScrollableJTable<>(model);
 
     addActionListeners(frame);

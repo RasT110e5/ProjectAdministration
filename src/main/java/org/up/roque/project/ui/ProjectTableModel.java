@@ -9,7 +9,7 @@ import org.up.roque.ui.TableColumn;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProjectTableModel extends CustomTableModel<Project> {
+public class ProjectTableModel extends CustomTableModel<Project, Integer> {
   public ProjectTableModel(MainFrame frame, ProjectService service) {
     super(frame, service);
     List<TableColumn<?, Project>> columns = new ArrayList<>();

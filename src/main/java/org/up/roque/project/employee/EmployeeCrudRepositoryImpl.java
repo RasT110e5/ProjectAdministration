@@ -54,19 +54,11 @@ public class EmployeeCrudRepositoryImpl extends CrudRepositoryTemplate<Employee,
 
   @Override
   protected void refreshRelationalTables(Employee entity) {
-//    template.delete("DELETE FROM EMPLOYEE_PROJECT WHERE EMPLOYEE=?", getIdAsParam(entity.getId()));
-//    for (Project project : entity.getProjects()) {
-//      template.save("INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT) VALUES (?,?)",
-//          List.of(new SqlParam(entity.getId()), new SqlParam(project.getId())));
-//    }
     log.info("No need to refresh relations");
   }
 
-//  public Set<Integer> getProjectIds(Employee entity) {
-//    return template.query(
-//        "SELECT PROJECT FROM EMPLOYEE_PROJECT WHERE EMPLOYEE = ?",
-//        getIdAsParam(entity.getId()),
-//        rs -> rs.getInt("PROJECT")
-//    );
-//  }
+  @Override
+  protected void deleteFromRelationalTables(Integer id) {
+    template.delete("DELETE FROM EMPLOYEE_PROJECT WHERE EMPLOYEE=?", getIdAsParam(id));
+  }
 }

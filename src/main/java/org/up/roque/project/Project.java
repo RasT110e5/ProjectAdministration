@@ -4,6 +4,7 @@ import lombok.*;
 import org.up.roque.db.Entity;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.task.Task;
+import org.up.roque.project.util.PartOfProject;
 
 import java.util.ArrayList;
 import java.util.List;

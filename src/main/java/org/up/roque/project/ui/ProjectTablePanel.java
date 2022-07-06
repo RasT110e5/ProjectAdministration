@@ -10,13 +10,12 @@ import org.up.roque.ui.ScrollableJTable;
 import javax.swing.*;
 
 public class ProjectTablePanel extends CustomPanel {
-  private final ProjectTableModel model;
-  private final ScrollableJTable<Project> table;
+  private final ScrollableJTable<Project, Integer> table;
   private final CRUDButtonComponent buttonsLayout = new CRUDButtonComponent();
 
   public ProjectTablePanel(MainFrame frame, ProjectService projectService) {
     super("Project Panel", frame);
-    this.model = new ProjectTableModel(frame, projectService);
+    ProjectTableModel model = new ProjectTableModel(frame, projectService);
     this.table = new ScrollableJTable<>(model);
 
     addActionListeners(frame);

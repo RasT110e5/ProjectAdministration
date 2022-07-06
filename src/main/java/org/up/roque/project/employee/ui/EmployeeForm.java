@@ -1,8 +1,8 @@
 package org.up.roque.project.employee.ui;
 
-import org.up.roque.project.ProcessingException;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
+import org.up.roque.project.util.ProcessingException;
 import org.up.roque.ui.CustomPanel;
 import org.up.roque.ui.DialogUtils;
 import org.up.roque.ui.MainFrame;

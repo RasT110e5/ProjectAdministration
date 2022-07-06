@@ -2,7 +2,6 @@ package org.up.roque.project.ui;
 
 import org.up.roque.project.Project;
 import org.up.roque.project.ProjectService;
-import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.ui.MainFrame;
 

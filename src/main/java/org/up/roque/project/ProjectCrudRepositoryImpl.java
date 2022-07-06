@@ -57,6 +57,11 @@ public class ProjectCrudRepositoryImpl extends CrudRepositoryTemplate<Project, I
     }
   }
 
+  @Override
+  protected void deleteFromRelationalTables(Integer id) {
+    template.delete("DELETE FROM EMPLOYEE_PROJECT WHERE PROJECT=?", getIdAsParam(id));
+  }
+
   private Project.ProjectBuilder getBaseBuilderParser(ResultSet rs) throws SQLException {
     return Project.builder()
         .name(rs.getString(NAME_COLUMN));

@@ -1,13 +1,12 @@
 package org.up.roque.project.ui;
 
 import lombok.Getter;
-import org.up.roque.project.ProcessingException;
 import org.up.roque.project.Project;
 import org.up.roque.project.ProjectService;
-import org.up.roque.project.Service;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.employee.ui.EmployeeTableModel;
+import org.up.roque.project.util.ProcessingException;
 import org.up.roque.ui.*;
 
 import javax.swing.*;
@@ -17,10 +16,10 @@ public class ProjectForm extends CustomPanel {
   private final ProjectService service;
   private final NamedTextFieldPanel name = new NamedTextFieldPanel("Name");
   @Getter
-  private final ScrollableJTable<Employee> employeeTable;
+  private final ScrollableJTable<Employee, Integer> employeeTable;
   protected final JButton saveButton = new JButton("Save");
 
-  public ProjectForm(String title, MainFrame frame, ProjectService service, Service<Employee> employeeService) {
+  public ProjectForm(String title, MainFrame frame, ProjectService service, EmployeeService employeeService) {
     super(title, frame);
     this.service = service;
     this.add(name);

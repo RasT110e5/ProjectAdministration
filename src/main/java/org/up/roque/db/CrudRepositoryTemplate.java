@@ -16,7 +16,7 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> {
   private final String delete;
   private final Class<ID> idClass;
 
-  private final DBTemplate template;
+  protected final DBTemplate template;
 
   protected CrudRepositoryTemplate(DBTemplate template, String table, Class<ID> idClass,
                                    String idColumn, String... columns) {
@@ -55,6 +55,8 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> {
 
   protected abstract void refreshRelationalTables(T entity);
 
+  protected abstract void deleteFromRelationalTables(ID id);
+
   public T save(T entity) {
     if (entity.getId() == null)
       insert(entity);
@@ -81,6 +83,7 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> {
 
   public void delete(ID id) {
     template.delete(delete, getIdAsParam(id));
+    deleteFromRelationalTables(id);
   }
 
   public Set<T> findAll() {
