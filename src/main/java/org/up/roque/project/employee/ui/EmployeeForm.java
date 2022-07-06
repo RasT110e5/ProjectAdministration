@@ -6,6 +6,7 @@ import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.ui.CustomPanel;
 import org.up.roque.ui.DialogUtils;
 import org.up.roque.ui.MainFrame;
+import org.up.roque.ui.NamedTextFieldPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -59,21 +60,4 @@ public class EmployeeForm extends CustomPanel {
     }
   }
 
-  private static class NamedTextFieldPanel extends JPanel {
-    private final JTextField textField = new JTextField(45);
-
-    public NamedTextFieldPanel(String name) {
-      this.setLayout(new FlowLayout(FlowLayout.CENTER));
-      this.add(new JLabel("%s: ".formatted(name)));
-      this.add(textField);
-    }
-
-    public String getContent() {
-      return this.textField.getText();
-    }
-
-    public void setContent(String content) {
-      this.textField.setText(content);
-    }
-  }
 }

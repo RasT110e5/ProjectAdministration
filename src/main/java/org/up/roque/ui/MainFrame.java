@@ -9,6 +9,7 @@ import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.employee.ui.CreateEmployeeForm;
 import org.up.roque.project.employee.ui.EditEmployeeForm;
 import org.up.roque.project.employee.ui.EmployeeTablePanel;
+import org.up.roque.project.ui.CreateProjectForm;
 import org.up.roque.project.ui.ProjectTablePanel;
 
 import javax.swing.*;
@@ -51,7 +52,7 @@ public class MainFrame extends WindowAdapter {
     mainPanel.add(headerPanel);
   }
 
-  private void showProjectView() {
+  public void showProjectView() {
     navigate(new ProjectTablePanel(this, projectService));
   }
 
@@ -65,6 +66,10 @@ public class MainFrame extends WindowAdapter {
 
   public void showEmployeeCreateForm() {
     navigate(new CreateEmployeeForm(this, employeeService));
+  }
+
+  public void showProjectCreateForm() {
+    navigate(new CreateProjectForm(this, projectService, employeeService));
   }
 
   public void showEmployeeEditForm(Employee employee) {

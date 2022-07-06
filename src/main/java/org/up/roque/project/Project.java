@@ -17,13 +17,11 @@ public class Project implements Entity<Integer> {
   private Integer id;
   private String name;
   @ToString.Exclude
-  private final List<Task> tasks;
+  @Builder.Default
+  private final List<Task> tasks = new ArrayList<>();
   @ToString.Exclude
+  @Builder.Default
   private final List<Employee> employees = new ArrayList<>();
-
-  public Project() {
-    this.tasks = new ArrayList<>();
-  }
 
   public boolean hasTask(Task task) {
     return this.tasks.contains(task);
