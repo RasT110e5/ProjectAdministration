@@ -1,15 +1,15 @@
-package org.up.roque.project.employee.ui;
+package org.up.roque.ui;
 
 import lombok.Getter;
 
 import javax.swing.*;
 import javax.swing.table.TableModel;
 
-public class EmployeeScrollableTable extends JTable {
+public class ScrollableJTable extends JTable {
   @Getter
   private final JScrollPane scrollPane;
 
-  public EmployeeScrollableTable(TableModel model) {
+  public ScrollableJTable(TableModel model) {
     super(model);
     this.scrollPane = new JScrollPane(this);
   }

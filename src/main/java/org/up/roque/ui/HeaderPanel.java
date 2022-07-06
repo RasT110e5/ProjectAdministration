@@ -16,7 +16,7 @@ public class HeaderPanel extends JPanel {
   public HeaderPanel() {
     this.add(returnButton);
     this.add(selectedViewTitle);
-//    this.add(projectButton);
+    this.add(projectButton);
     this.add(employeeButton);
     styleComponents();
   }
@@ -39,7 +39,7 @@ public class HeaderPanel extends JPanel {
 
   private void styleComponents() {
     styleLayout();
-    selectedViewTitle.setPreferredSize(new Dimension(600, 50));
+    selectedViewTitle.setPreferredSize(new Dimension(500, 50));
   }
 
   private void styleLayout() {

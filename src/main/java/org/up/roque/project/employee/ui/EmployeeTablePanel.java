@@ -2,7 +2,8 @@ package org.up.roque.project.employee.ui;
 
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
-import org.up.roque.project.ui.CRUDButtonComponent;
+import org.up.roque.ui.CRUDButtonComponent;
+import org.up.roque.ui.ScrollableJTable;
 import org.up.roque.ui.CustomPanel;
 import org.up.roque.ui.MainFrame;
 
@@ -10,13 +11,13 @@ import javax.swing.*;
 
 public class EmployeeTablePanel extends CustomPanel {
   private final EmployeeTableModel model;
-  private final EmployeeScrollableTable table;
+  private final ScrollableJTable table;
   private final CRUDButtonComponent buttonsLayout = new CRUDButtonComponent();
 
   public EmployeeTablePanel(MainFrame frame, EmployeeService employeeService) {
-    super("Employee Grid", frame);
+    super("Employee Panel", frame);
     this.model = new EmployeeTableModel(frame, employeeService);
-    this.table = new EmployeeScrollableTable(model);
+    this.table = new ScrollableJTable(model);
 
     addActionListeners(frame);
 
@@ -36,5 +37,4 @@ public class EmployeeTablePanel extends CustomPanel {
     if (employee != null)
       frame.showEmployeeEditForm(employee);
   }
-
 }

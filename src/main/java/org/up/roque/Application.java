@@ -4,6 +4,9 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.up.roque.db.DBTemplate;
 import org.up.roque.db.DBTemplateImpl;
+import org.up.roque.project.ProjectCrudRepositoryImpl;
+import org.up.roque.project.ProjectService;
+import org.up.roque.project.ProjectServiceImpl;
 import org.up.roque.project.employee.EmployeeCrudRepositoryImpl;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.employee.EmployeeServiceImpl;
@@ -16,6 +19,8 @@ public class Application {
 
   @Getter
   private EmployeeService employeeService;
+  @Getter
+  private ProjectService projectService;
 
   public Application(MainFrame frame) {
     this.frame = frame;
@@ -42,6 +47,7 @@ public class Application {
 
   private void startServices() {
     employeeService = new EmployeeServiceImpl(new EmployeeCrudRepositoryImpl(dbTemplate));
+    projectService = new ProjectServiceImpl(new ProjectCrudRepositoryImpl(dbTemplate), employeeService);
   }
 
   private void startUI() {

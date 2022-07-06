@@ -34,7 +34,7 @@ public class EmployeeForm extends CustomPanel {
       DialogUtils.error(frame.getJFrame(), e.getMessage());
       return;
     }
-    frame.showEmployeeGrid();
+    frame.showEmployeeView();
   }
 
   protected void setNameContent(String name) {

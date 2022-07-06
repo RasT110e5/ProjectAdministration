@@ -3,11 +3,13 @@ package org.up.roque.ui;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.up.roque.Application;
+import org.up.roque.project.ProjectService;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
 import org.up.roque.project.employee.ui.CreateEmployeeForm;
 import org.up.roque.project.employee.ui.EditEmployeeForm;
 import org.up.roque.project.employee.ui.EmployeeTablePanel;
+import org.up.roque.project.ui.ProjectTablePanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,10 +25,12 @@ public class MainFrame extends WindowAdapter {
   private final HeaderPanel headerPanel = new HeaderPanel();
 
   private EmployeeService employeeService;
+  private ProjectService projectService;
   private boolean running;
 
   public void init(Application application) {
     this.employeeService = application.getEmployeeService();
+    this.projectService = application.getProjectService();
   }
 
   public void show() {
@@ -42,15 +46,20 @@ public class MainFrame extends WindowAdapter {
   private void setHeader() {
     headerPanel.setTitle(homePanel.getTitle());
     headerPanel.setReturnActionListener(e -> showHome());
-    headerPanel.setEmployeeActionListener(e -> showEmployeeGrid());
+    headerPanel.setEmployeeActionListener(e -> showEmployeeView());
+    headerPanel.setProjectActionListener(e -> showProjectView());
     mainPanel.add(headerPanel);
+  }
+
+  private void showProjectView() {
+    navigate(new ProjectTablePanel(this, projectService));
   }
 
   public void showHome() {
     navigate(homePanel);
   }
 
-  public void showEmployeeGrid() {
+  public void showEmployeeView() {
     navigate(new EmployeeTablePanel(this, employeeService));
   }
 
