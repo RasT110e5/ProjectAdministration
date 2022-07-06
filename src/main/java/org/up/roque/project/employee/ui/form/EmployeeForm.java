@@ -2,40 +2,19 @@ package org.up.roque.project.employee.ui.form;
 
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.employee.EmployeeService;
-import org.up.roque.project.util.ProcessingException;
-import org.up.roque.ui.util.CustomPanel;
-import org.up.roque.ui.util.DialogUtils;
 import org.up.roque.ui.MainFrame;
 import org.up.roque.ui.custom.NamedTextFieldPanel;
+import org.up.roque.ui.util.CustomFormPanel;
+import org.up.roque.ui.util.DialogUtils;
 
-import javax.swing.*;
-import java.awt.*;
-
-public abstract class EmployeeForm extends CustomPanel {
-  private final EmployeeService service;
+public abstract class EmployeeForm extends CustomFormPanel<Employee> {
   private final NamedTextFieldPanel name = new NamedTextFieldPanel("Name");
   private final NamedTextFieldPanel costPerHour = new NamedTextFieldPanel("Cost per hour");
-  protected final JButton saveButton = new JButton("Save");
 
   public EmployeeForm(String title, MainFrame frame, EmployeeService service) {
-    super(title, frame);
-    this.service = service;
-    this.add(name);
-    this.add(costPerHour);
-    JPanel saveButtonLayout = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    saveButtonLayout.add(saveButton);
-    this.add(saveButtonLayout);
-    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-  }
-
-  protected void submit(Employee employee) {
-    try {
-      service.save(employee);
-    } catch (ProcessingException e) {
-      DialogUtils.error(frame.getJFrame(), e.getMessage());
-      return;
-    }
-    frame.showEmployeeView();
+    super(title, frame, service);
+    init(name, costPerHour);
+    saveButton.addActionListener(e -> frame.showEmployeeView());
   }
 
   protected void setNameContent(String name) {
