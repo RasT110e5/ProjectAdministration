@@ -10,6 +10,7 @@ import javax.swing.*;
 public abstract class CustomFormPanel<T extends Entity<?>> extends CustomPanel {
   private final Service<T, ?> service;
   protected final JButton saveButton = new JButton("Save");
+  private JPanel buttonPanel = UIUtil.rightFlowPanelWithAlignment(saveButton);
 
   protected CustomFormPanel(String title, MainFrame frame, Service<T, ?> service) {
     super(title, frame);
@@ -19,7 +20,14 @@ public abstract class CustomFormPanel<T extends Entity<?>> extends CustomPanel {
 
   protected void init(JComponent... components) {
     for (JComponent component : components) this.add(component);
-    this.add(UIUtil.rightFlowPanelWithAlignment(saveButton));
+    this.add(buttonPanel);
+  }
+
+  protected void addExtraComponents(JComponent... components) {
+    this.remove(buttonPanel);
+    for (JComponent component : components)
+      this.add(component);
+    this.add(buttonPanel);
   }
 
   protected void submit(T entity) {

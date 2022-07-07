@@ -23,17 +23,17 @@ public class TaskTablePanel extends JPanel {
     this.project = project;
     this.table = new ScrollableJTable<>(model);
 
-    addActionListeners(frame);
+    addActionListeners();
 
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     this.add(table.getScrollPane());
     this.add(buttonsLayout);
   }
 
-  private void addActionListeners(MainFrame frame) {
+  private void addActionListeners() {
     buttonsLayout.addActionListenerToDelete(e -> deleteTask());
     buttonsLayout.addActionListenerToAdd(e -> frame.showTaskCreateForm(project));
-    buttonsLayout.addActionListenerToEdit(e -> showProjectEditForm());
+    buttonsLayout.addActionListenerToEdit(e -> showTaskToEdit());
   }
 
   private void deleteTask() {
@@ -41,9 +41,9 @@ public class TaskTablePanel extends JPanel {
     frame.showProjectStatusView(project);
   }
 
-  private void showProjectEditForm() {
-//    Project project = table.getSelectedItem();
-//    if (project != null)
-//      frame.showProjectEditForm(project);
+  private void showTaskToEdit() {
+    Task entity = table.getSelectedItem();
+    if (entity != null)
+      frame.showTaskEditForm(entity, project);
   }
 }

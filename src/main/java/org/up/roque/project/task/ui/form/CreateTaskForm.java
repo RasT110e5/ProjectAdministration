@@ -17,7 +17,7 @@ public class CreateTaskForm extends TaskForm {
         Task.builder()
             .name(super.getNameContent())
             .description(super.getDescriptionContent())
-            .estimatedHours(super.getHours())
+            .estimatedHours(super.getEstimationHours())
             .actualDuration(0)
             .status(TaskStatus.OPEN)
             .project(project)
