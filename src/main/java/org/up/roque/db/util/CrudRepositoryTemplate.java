@@ -13,7 +13,7 @@ public abstract class CrudRepositoryTemplate<T extends Entity<ID>, ID> {
   public static final String UPDATE_STATEMENT = "UPDATE %s SET %s WHERE %s=?";
   public static final String INSERT_STATEMENT = "INSERT INTO %s (%s) VALUES (%s)";
 
-  private final String select;
+  protected final String select;
   private final String update;
   private final String insert;
   private final String delete;

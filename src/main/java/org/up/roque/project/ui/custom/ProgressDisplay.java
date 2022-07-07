@@ -1,8 +1,10 @@
-package org.up.roque.project.ui;
+package org.up.roque.project.ui.custom;
 
-import org.up.roque.project.util.UIUtil;
+import org.up.roque.ui.util.UIUtil;
 
 import javax.swing.*;
+
+import java.awt.*;
 
 import static javax.swing.SwingConstants.CENTER;
 
@@ -19,6 +21,14 @@ public class ProgressDisplay extends JPanel {
     this.add(UIUtil.centerFlowPanelWithAlignment(this.title));
     this.add(UIUtil.centerFlowPanelWithAlignment(this.cost, Box.createHorizontalStrut(10), this.hours));
 
+    styleLabels();
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+  }
+
+  private void styleLabels() {
+    title.setForeground(Color.GRAY);
+    title.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+    cost.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
+    hours.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 22));
   }
 }

@@ -58,20 +58,47 @@ VALUES ('Domenic Collingwood', 111);
 INSERT INTO PROJECT (NAME)
 VALUES ('Plan EOY Party');
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
-VALUES ( 1, 1 );
+VALUES (1, 1);
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
-VALUES ( 3, 1 );
+VALUES (3, 1);
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
-VALUES ( 2, 1 );
+VALUES (2, 1);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Book Venue',
+        'Find and send deposit for a venue to host the event',
+        3,
+        {ts '2022-07-06 18:47:52'},
+        1,
+        1,
+        20);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Find Catering',
+        'Find and send deposit for a catering company to serve in the event',
+        3,
+        {ts '2022-07-06 18:48:52'},
+        1,
+        1,
+        20);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Send Invites',
+        'Send invites to employess with all the details of the event',
+        2,
+        {ts '2022-07-06 18:49:52'},
+        3,
+        1,
+        20);
 
 INSERT INTO PROJECT (NAME)
 VALUES ('Create Q2 Report');
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
-VALUES ( 1, 2 );
+VALUES (1, 2);
 
 INSERT INTO PROJECT (NAME)
 VALUES ('Inventory System Application');
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
-VALUES ( 1, 3 );
+VALUES (1, 3);
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
-VALUES ( 2, 3 );
+VALUES (2, 3);

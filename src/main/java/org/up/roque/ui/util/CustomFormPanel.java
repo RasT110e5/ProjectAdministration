@@ -12,7 +12,7 @@ public abstract class CustomFormPanel<T extends Entity<?>> extends CustomPanel {
   private final Service<T, ?> service;
   protected final JButton saveButton = new JButton("Save");
 
-  public CustomFormPanel(String title, MainFrame frame, Service<T, ?> service) {
+  protected CustomFormPanel(String title, MainFrame frame, Service<T, ?> service) {
     super(title, frame);
     this.service = service;
     this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

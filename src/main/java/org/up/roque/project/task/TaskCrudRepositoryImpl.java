@@ -4,12 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.up.roque.db.util.CrudRepositoryTemplate;
 import org.up.roque.db.util.DBTemplate;
 import org.up.roque.db.util.SqlParam;
+import org.up.roque.project.Project;
 import org.up.roque.project.ProjectCrudRepository;
 import org.up.roque.project.employee.EmployeeCrudRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer>
@@ -86,5 +88,11 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
   @Override
   protected void deleteFromRelationalTables(Integer integer) {
     log.info("No need to update relations yet");
+  }
+
+  @Override
+  public Set<Task> findAllByProject(Project project) {
+    return template.query(select + " WHERE PROJECT=?",
+        getIdAsParam(project.getId()), getResultSetParser());
   }
 }

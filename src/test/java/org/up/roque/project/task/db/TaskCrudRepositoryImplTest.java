@@ -36,9 +36,13 @@ class TaskCrudRepositoryImplTest {
 
   private Task saveNewTask() {
     Task entity = Entities.randomTask();
+    persistRelatedEntities(entity);
+    return repository.save(entity);
+  }
+
+  private void persistRelatedEntities(Task entity) {
     projectRepo.save(entity.getProject());
     employeeRepo.save(entity.getAssignedEmployee());
-    return repository.save(entity);
   }
 
   @Test
@@ -56,6 +60,7 @@ class TaskCrudRepositoryImplTest {
     anotherEntity.setId(entity.getId());
     String newName = "different name";
     anotherEntity.setName(newName);
+    persistRelatedEntities(anotherEntity);
     repository.save(anotherEntity);
     assertThat(repository.getOne(entity.getId())).isEqualTo(entity)
         .extracting(Task::getName).isEqualTo(newName);

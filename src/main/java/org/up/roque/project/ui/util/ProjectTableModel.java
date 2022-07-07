@@ -16,6 +16,7 @@ public class ProjectTableModel extends CustomTableModel<Project, Integer> {
     columns.add(new TableColumn<>("Project Id", Integer.class, Project::getId));
     columns.add(new TableColumn<>("Name", String.class, Project::getName));
     columns.add(new TableColumn<>("Employee Quantity", Integer.class, p -> p.getEmployees().size()));
+    columns.add(new TableColumn<>("Tasks Quantity", Integer.class, p -> p.getTasks().size()));
     super.setColumns(columns);
   }
 }

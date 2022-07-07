@@ -19,7 +19,7 @@ class ApplicationTest {
   @SneakyThrows
   void applicationTest_(@Mock MainFrame mainFrame) {
     when(mainFrame.isRunning()).thenReturn(true, false);
-    Application application = new Application();
+    Application application = new Application(mainFrame);
     int status = SystemLambda.catchSystemExit(application::run);
     assertThat(status).isZero();
   }

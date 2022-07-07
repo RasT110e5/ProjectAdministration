@@ -10,6 +10,7 @@ import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public abstract class CustomTableModel<T extends Entity<ID>, ID> extends AbstractTableModel {
   private final JFrame parentFrame;
@@ -19,10 +20,16 @@ public abstract class CustomTableModel<T extends Entity<ID>, ID> extends Abstrac
   @Setter
   private List<TableColumn<?, T>> columns = new ArrayList<>();
 
-  public CustomTableModel(MainFrame frame, Service<T, ID> service) {
+  protected CustomTableModel(MainFrame frame, Service<T, ID> service) {
     this.parentFrame = frame.getJFrame();
     this.service = service;
     this.items = new ArrayList<>(service.findAll());
+  }
+
+  protected CustomTableModel(MainFrame frame, Service<T, ID> service, Set<T> items) {
+    this.parentFrame = frame.getJFrame();
+    this.service = service;
+    this.items = new ArrayList<>(items);
   }
 
   @Override
