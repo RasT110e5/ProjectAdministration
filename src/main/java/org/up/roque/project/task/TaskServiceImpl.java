@@ -10,17 +10,17 @@ import java.util.Set;
 
 @Slf4j
 public class TaskServiceImpl extends ServiceTemplate<Task, Integer> implements TaskService {
-  private final TaskCrudRepository repository;
+  private final TaskCrudRepository taskRepository;
 
   public TaskServiceImpl(TaskCrudRepository repository) {
     super(repository);
-    this.repository = repository;
+    this.taskRepository = repository;
   }
 
   @Override
-  public Set<Task> findAllByProject(Project project) {
+  public Set<Task> findAllBy(Project project) {
     try {
-      return this.repository.findAllByProject(project);
+      return this.taskRepository.findAllByProject(project);
     } catch (DataAccessException e) {
       log.warn("Exception while trying to get tasks for project: '{}', exception: {}", project, e.toString());
       throw new ProcessingException("Tasks couldn't be found");

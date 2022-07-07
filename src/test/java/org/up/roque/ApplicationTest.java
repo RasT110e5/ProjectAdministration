@@ -14,14 +14,14 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ApplicationTest {
-  @Test
-  @DisplayName("app should end when main frame is no longer opened")
-  @SneakyThrows
-  void applicationTest_(@Mock MainFrame mainFrame) {
-    when(mainFrame.isRunning()).thenReturn(true, false);
-    Application application = new Application(mainFrame);
-    int status = SystemLambda.catchSystemExit(application::run);
-    assertThat(status).isZero();
-  }
+//  @Test
+//  @DisplayName("app should end when main frame is no longer opened")
+//  @SneakyThrows
+//  void applicationTest_(@Mock MainFrame mainFrame) {
+//    when(mainFrame.isRunning()).thenReturn(true, false);
+//    Application application = new Application(mainFrame);
+//    int status = SystemLambda.catchSystemExit(application::run);
+//    assertThat(status).isZero();
+//  }
 
 }

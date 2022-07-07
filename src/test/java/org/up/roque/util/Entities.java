@@ -1,14 +1,12 @@
 package org.up.roque.util;
 
-import org.apache.commons.lang3.RandomUtils;
 import org.up.roque.project.Project;
 import org.up.roque.project.employee.Employee;
 import org.up.roque.project.task.Task;
+import org.up.roque.project.task.TaskStatus;
 
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAmount;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
@@ -41,6 +39,12 @@ public abstract class Entities {
         .actualDuration(estimatedHours + nextInt(0, 10))
         .project(randomProject())
         .assignedEmployee(randomEmployee())
+        .status(randomFromEnum(TaskStatus.class))
         .build();
+  }
+
+  private static <T extends Enum<?>> T randomFromEnum(Class<T> enumClass) {
+    int randomIndex = nextInt(0, enumClass.getEnumConstants().length);
+    return enumClass.getEnumConstants()[randomIndex];
   }
 }

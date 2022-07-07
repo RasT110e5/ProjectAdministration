@@ -4,10 +4,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.up.roque.db.util.CrudRepositoryTemplate;
 import org.up.roque.db.util.DBTemplate;
 import org.up.roque.db.util.SqlParam;
+import org.up.roque.project.Project;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 public class EmployeeCrudRepositoryImpl extends CrudRepositoryTemplate<Employee, Integer>
@@ -54,12 +56,24 @@ public class EmployeeCrudRepositoryImpl extends CrudRepositoryTemplate<Employee,
 
   @Override
   protected void refreshRelationalTables(Employee entity) {
-    log.info("No need to refresh relations");
+    for (Project project : entity.getProjects()) {
+      template.save("INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT) VALUES(?,?)",
+          List.of(new SqlParam(entity.getId()), new SqlParam(project.getId()))
+      );
+    }
   }
 
   @Override
   protected void deleteFromRelationalTables(Integer id) {
     template.delete("DELETE FROM EMPLOYEE_PROJECT WHERE EMPLOYEE=?", getIdAsParam(id));
     template.delete("DELETE FROM TASK WHERE ASSIGNED_EMPLOYEE=?", getIdAsParam(id));
+  }
+
+  @Override
+  public Set<Employee> findAllByProject(Project project) {
+    return template.query(select + " e JOIN EMPLOYEE_PROJECT r on r.EMPLOYEE=e.ID WHERE r.PROJECT=?",
+        getIdAsParam(project.getId()),
+        getResultSetParser()
+    );
   }
 }

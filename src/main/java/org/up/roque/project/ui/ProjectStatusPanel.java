@@ -18,7 +18,7 @@ public class ProjectStatusPanel extends CustomPanel {
   public ProjectStatusPanel(MainFrame frame, TaskService service, Project project) {
     super(project.getName(), frame);
 
-    Set<Task> tasks = service.findAllByProject(project);
+    Set<Task> tasks = service.findAllBy(project);
     TaskTablePanel taskTablePanel = new TaskTablePanel(frame, service, tasks, project);
     this.add(taskTablePanel);
 
