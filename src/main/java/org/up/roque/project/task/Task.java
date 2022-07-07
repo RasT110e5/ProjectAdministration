@@ -21,10 +21,12 @@ public class Task implements PartOfProject, Entity<Integer> {
   private String name;
   private String description;
   private Integer estimatedHours;
-  private LocalDateTime createdDate;
   private Integer actualDuration;
+  private TaskStatus status;
   private Project project;
   private Employee assignedEmployee;
+  @Builder.Default
+  private LocalDateTime createdDate = LocalDateTime.now();
   @ToString.Exclude
   @Builder.Default
   private final List<Comment> comments = new ArrayList<>();

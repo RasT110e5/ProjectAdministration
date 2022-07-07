@@ -9,7 +9,7 @@ import java.awt.*;
 public class UIUtil {
 
   public JPanel centerFlowPanelWithAlignment(JComponent component) {
-    return wrapInPanelWithAlignment(FlowLayout.LEFT, component);
+    return wrapInPanelWithAlignment(FlowLayout.CENTER, component);
   }
 
   public JPanel centerFlowPanelWithAlignment(Component... components) {

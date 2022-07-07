@@ -23,6 +23,7 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
   public static final String ESTIMATED_HOURS_COLUMN = "ESTIMATED_HOURS";
   public static final String CREATED_DATE_COLUMN = "CREATED_DATE";
   public static final String ACTUAL_DURATION_COLUMN = "ACTUAL_DURATION";
+  public static final String STATUS = "STATUS";
   public static final String ASSIGNED_EMPLOYEE_COLUMN = "ASSIGNED_EMPLOYEE";
   public static final String PROJECT_COLUMN = "PROJECT";
 
@@ -31,7 +32,7 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
 
   public TaskCrudRepositoryImpl(DBTemplate template, ProjectCrudRepository projectRepo, EmployeeCrudRepository employeeRepo) {
     super(template, TASK, Integer.class, ID_COLUMN, NAME_COLUMN, DESCRIPTION_COLUMN,
-        ESTIMATED_HOURS_COLUMN, CREATED_DATE_COLUMN, ACTUAL_DURATION_COLUMN,
+        ESTIMATED_HOURS_COLUMN, CREATED_DATE_COLUMN, ACTUAL_DURATION_COLUMN, STATUS,
         PROJECT_COLUMN, ASSIGNED_EMPLOYEE_COLUMN);
     this.projectRepo = projectRepo;
     this.employeeRepo = employeeRepo;
@@ -45,6 +46,7 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
         new SqlParam(entity.getEstimatedHours()),
         new SqlParam(entity.getCreatedDate()),
         new SqlParam(entity.getActualDuration()),
+        new SqlParam(String.valueOf(entity.getStatus())),
         new SqlParam(entity.getProject().getId()),
         new SqlParam(entity.getAssignedEmployee().getId())
     );
@@ -76,6 +78,7 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
         .estimatedHours(rs.getInt(ESTIMATED_HOURS_COLUMN))
         .createdDate(rs.getTimestamp(CREATED_DATE_COLUMN).toLocalDateTime())
         .actualDuration(rs.getInt(ACTUAL_DURATION_COLUMN))
+        .status(TaskStatus.valueOf(rs.getString(STATUS)))
         .project(projectRepo.getOne(rs.getInt(PROJECT_COLUMN)))
         .assignedEmployee(employeeRepo.getOne(rs.getInt(ASSIGNED_EMPLOYEE_COLUMN)));
   }

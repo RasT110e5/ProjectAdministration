@@ -63,38 +63,147 @@ INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
 VALUES (3, 1);
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
 VALUES (2, 1);
-INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION,
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (20, 1);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (12, 1);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (13, 1);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (15, 1);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (16, 1);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
                   PROJECT, ASSIGNED_EMPLOYEE)
 VALUES ('Book Venue',
         'Find and send deposit for a venue to host the event',
         3,
         {ts '2022-07-06 18:47:52'},
         1,
+        'OPEN',
         1,
         20);
-INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION,
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
                   PROJECT, ASSIGNED_EMPLOYEE)
 VALUES ('Find Catering',
         'Find and send deposit for a catering company to serve in the event',
         3,
         {ts '2022-07-06 18:48:52'},
         1,
+        'OPEN',
         1,
         20);
-INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION,
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
                   PROJECT, ASSIGNED_EMPLOYEE)
 VALUES ('Send Invites',
-        'Send invites to employess with all the details of the event',
+        'Send invites to employees with all the details of the event',
         2,
         {ts '2022-07-06 18:49:52'},
         3,
+        'OPEN',
         1,
         20);
+INSERT INTO TASK (NAME, DESCRIPTION, CREATED_DATE, ESTIMATED_HOURS, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Book entertainment A',
+        'Look over the options for entertainment A and negotiate a price for the event',
+        {ts '2022-07-06 11:00:00'},
+        3,
+        4,
+        'OPEN',
+        1,
+        15);
+INSERT INTO TASK (NAME, DESCRIPTION, CREATED_DATE, ESTIMATED_HOURS, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Book entertainment B',
+        'Look over the options for entertainment B and negotiate a price for the event',
+        {ts '2022-07-06 11:00:00'},
+        3,
+        2,
+        'OPEN',
+        1,
+        13);
+INSERT INTO TASK (NAME, DESCRIPTION, CREATED_DATE, ESTIMATED_HOURS, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Book entertainment C',
+        'Look over the options for entertainment C and negotiate a price for the event',
+        {ts '2022-07-06 11:00:00'},
+        6,
+        2,
+        'OPEN',
+        1,
+        12);
+INSERT INTO TASK (NAME, DESCRIPTION, CREATED_DATE, ESTIMATED_HOURS, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Book entertainment D',
+        'Look over the options for entertainment D and negotiate a price for the event',
+        {ts '2022-07-06 11:00:00'},
+        3,
+        10,
+        'OPEN',
+        1,
+        16);
 
 INSERT INTO PROJECT (NAME)
 VALUES ('Create Q2 Report');
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
 VALUES (1, 2);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (9, 2);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (10, 2);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (11, 2);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Prepare template using enterprise tool',
+        'Download and set the tool to prepare a template we can use as the base for the report',
+        10,
+        {ts '2022-07-06 18:49:52'},
+        24,
+        'OPEN',
+        2,
+        9);
+INSERT INTO TASK (NAME, DESCRIPTION, CREATED_DATE, ESTIMATED_HOURS, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Add data from department A',
+        'Talk with the director of department A and agree on the data they need to provide us to prepare the report',
+        {ts '2022-07-06 11:00:00'},
+        3,
+        5,
+        'OPEN',
+        2,
+        11);
+INSERT INTO TASK (NAME, DESCRIPTION, CREATED_DATE, ESTIMATED_HOURS, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Add data from department B',
+        'Talk with the director of department B and agree on the data they need to provide us to prepare the report',
+        {ts '2022-07-06 11:00:00'},
+        3,
+        1,
+        'OPEN',
+        2,
+        9);
+INSERT INTO TASK (NAME, DESCRIPTION, CREATED_DATE, ESTIMATED_HOURS, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Add data from department C',
+        'Talk with the director of department C and agree on the data they need to provide us to prepare the report',
+        {ts '2022-07-06 11:00:00'},
+        3,
+        7,
+        'OPEN',
+        2,
+        11);
+INSERT INTO TASK (NAME, DESCRIPTION, CREATED_DATE, ESTIMATED_HOURS, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Add data from department D',
+        'Talk with the director of department D and agree on the data they need to provide us to prepare the report',
+        {ts '2022-07-06 11:00:00'},
+        3,
+        1,
+        'OPEN',
+        2,
+        10);
 
 INSERT INTO PROJECT (NAME)
 VALUES ('Inventory System Application');
@@ -102,3 +211,133 @@ INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
 VALUES (1, 3);
 INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
 VALUES (2, 3);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (3, 3);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (10, 3);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (20, 3);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (22, 3);
+INSERT INTO EMPLOYEE_PROJECT (EMPLOYEE, PROJECT)
+VALUES (17, 3);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('SetUp local dev environment',
+        'Download and setup all the technologies a developer needs locally to work in this project',
+        10,
+        {ts '2022-07-06 18:49:52'},
+        24,
+        'OPEN',
+        3,
+        1);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Create Inventory View',
+        'Taking the response from the inventory datasource create a view to display the information correctly',
+        24,
+        {ts '2022-07-06 18:49:52'},
+        6,
+        'OPEN',
+        3,
+        2);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Create Devices View',
+        'Taking the response from the backend create a view to display the information correctly',
+        10,
+        {ts '2022-07-06 18:49:52'},
+        24,
+        'OPEN',
+        3,
+        2);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Create Devices Rest endpoint',
+        'Create rest endpoint to return a response with all the information of our devices by location',
+        10,
+        {ts '2022-07-06 18:49:52'},
+        24,
+        'OPEN',
+        3,
+        3);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('SetUp pipeline for dev deployment',
+        'Configure a Jenkinsfile to deploy completely our application to our development environment',
+        24,
+        {ts '2022-07-06 18:49:52'},
+        12,
+        'OPEN',
+        3,
+        10);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('SetUp pipeline for uat deployment',
+        'Configure a Jenkinsfile to deploy completely our application to our uat environment',
+        23,
+        {ts '2022-07-06 18:49:52'},
+        10,
+        'OPEN',
+        3,
+        10);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('SetUp pipeline for qa deployment',
+        'Configure a Jenkinsfile to deploy completely our application to our qa environment',
+        12,
+        {ts '2022-07-06 18:49:52'},
+        2,
+        'OPEN',
+        3,
+        17);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('SetUp pipeline for prod deployment',
+        'Configure a Jenkinsfile to deploy completely our application to our qa environment',
+        36,
+        {ts '2022-07-06 18:49:52'},
+        10,
+        'OPEN',
+        3,
+        17);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Implement feature A',
+        'Talk with users that request feature A, design the feature and implement it',
+        8,
+        {ts '2022-07-06 18:49:52'},
+        1,
+        'OPEN',
+        3,
+        1);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Implement feature B',
+        'Talk with users that request feature B, design the feature and implement it',
+        3,
+        {ts '2022-07-06 18:49:52'},
+        2,
+        'OPEN',
+        3,
+        1);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Implement feature C',
+        'Talk with users that request feature C, design the feature and implement it',
+        12,
+        {ts '2022-07-06 18:49:52'},
+        5,
+        'OPEN',
+        3,
+        20);
+INSERT INTO TASK (NAME, DESCRIPTION, ESTIMATED_HOURS, CREATED_DATE, ACTUAL_DURATION, STATUS,
+                  PROJECT, ASSIGNED_EMPLOYEE)
+VALUES ('Implement feature D',
+        'Talk with users that request feature D, design the feature and implement it',
+        10,
+        {ts '2022-07-06 18:49:52'},
+        3,
+        'OPEN',
+        3,
+        22);

@@ -6,7 +6,6 @@ import org.up.roque.project.util.Service;
 import org.up.roque.ui.MainFrame;
 
 import javax.swing.*;
-import java.awt.*;
 
 public abstract class CustomFormPanel<T extends Entity<?>> extends CustomPanel {
   private final Service<T, ?> service;
@@ -20,9 +19,7 @@ public abstract class CustomFormPanel<T extends Entity<?>> extends CustomPanel {
 
   protected void init(JComponent... components) {
     for (JComponent component : components) this.add(component);
-    JPanel saveButtonLayout = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-    saveButtonLayout.add(saveButton);
-    this.add(saveButtonLayout);
+    this.add(UIUtil.rightFlowPanelWithAlignment(saveButton));
   }
 
   protected void submit(T entity) {

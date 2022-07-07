@@ -17,12 +17,15 @@ public class ProjectStatusPanel extends CustomPanel {
 
   public ProjectStatusPanel(MainFrame frame, TaskService service, Project project) {
     super(project.getName(), frame);
+
     Set<Task> tasks = service.findAllByProject(project);
     TaskTablePanel taskTablePanel = new TaskTablePanel(frame, service, tasks, project);
     this.add(taskTablePanel);
+
     this.add(Box.createHorizontalStrut(25));
     ProjectProgress projectProgress = new ProjectProgress(tasks);
     this.add(UIUtil.centerFlowPanelWithAlignment(projectProgress));
+
     this.setLayout(new FlowLayout(FlowLayout.CENTER));
   }
 }

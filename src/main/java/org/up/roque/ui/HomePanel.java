@@ -5,6 +5,7 @@ import org.up.roque.project.Project;
 import org.up.roque.project.ProjectService;
 import org.up.roque.ui.util.CustomPanel;
 import org.up.roque.ui.util.OnClickActionListener;
+import org.up.roque.ui.util.UIUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,8 @@ public class HomePanel extends CustomPanel {
   }
 
   private void addProjectLinks() {
-    Set<Project> projects = projectService.findAllProjectsWithoutRelatedEntities();
+//    Set<Project> projects = projectService.findAllProjectsWithoutRelatedEntities();
+    Set<Project> projects = projectService.findAll();
     for (Project project : projects) addProjectLink(project);
   }
 
@@ -52,8 +54,8 @@ public class HomePanel extends CustomPanel {
   private void addNewProjectButton() {
     JButton newProjectButton = new JButton("New Project");
     newProjectButton.addActionListener(e -> frame.showProjectCreateForm());
-    newProjectCenteredPanel.add(newProjectButton);
-    this.add(newProjectCenteredPanel);
+    this.add(Box.createVerticalStrut(20));
+    this.add(UIUtil.centerFlowPanelWithAlignment(newProjectButton));
   }
 
 }

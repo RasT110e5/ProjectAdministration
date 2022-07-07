@@ -17,7 +17,6 @@ public class TaskTablePanel extends JPanel {
   private final MainFrame frame;
   private final Project project;
 
-
   public TaskTablePanel(MainFrame frame, TaskService service, Set<Task> tasks, Project project) {
     TaskTableModel model = new TaskTableModel(frame, service, tasks);
     this.frame = frame;
@@ -33,7 +32,7 @@ public class TaskTablePanel extends JPanel {
 
   private void addActionListeners(MainFrame frame) {
     buttonsLayout.addActionListenerToDelete(e -> deleteTask());
-    buttonsLayout.addActionListenerToAdd(e -> frame.showHome());
+    buttonsLayout.addActionListenerToAdd(e -> frame.showTaskCreateForm(project));
     buttonsLayout.addActionListenerToEdit(e -> showProjectEditForm());
   }
 

@@ -18,6 +18,7 @@ public class TaskTableModel extends CustomTableModel<Task> {
     columns.add(new TableColumn<>("Estimated Hs", Integer.class, Task::getEstimatedHours));
     columns.add(new TableColumn<>("Actual Hs", Integer.class, Task::getActualDuration));
     columns.add(new TableColumn<>("Assigned to", String.class, t -> t.getAssignedEmployee().getName()));
+    columns.add(new TableColumn<>("Status", String.class, t -> t.getStatus().name()));
     super.setColumns(columns);
   }
 }
