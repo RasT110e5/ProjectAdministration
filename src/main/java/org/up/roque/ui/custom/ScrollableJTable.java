@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ScrollableJTable<E extends Entity<ID>, ID> extends JTable {
+public class ScrollableJTable<E extends Entity<?>> extends JTable {
   @Getter
   private final JScrollPane scrollPane;
-  private final CustomTableModel<E, ID> model;
+  private final CustomTableModel<E> model;
 
-  public ScrollableJTable(CustomTableModel<E, ID> model) {
+  public ScrollableJTable(CustomTableModel<E> model) {
     super(model);
     this.model = model;
     this.scrollPane = new JScrollPane(this);

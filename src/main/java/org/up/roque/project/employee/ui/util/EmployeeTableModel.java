@@ -9,7 +9,7 @@ import org.up.roque.ui.util.TableColumn;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeTableModel extends CustomTableModel<Employee, Integer> {
+public class EmployeeTableModel extends CustomTableModel<Employee> {
   public EmployeeTableModel(MainFrame frame, EmployeeService service) {
     super(frame, service);
     List<TableColumn<?, Employee>> columns = new ArrayList<>();

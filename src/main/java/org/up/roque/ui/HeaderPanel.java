@@ -1,6 +1,7 @@
 package org.up.roque.ui;
 
 import lombok.Getter;
+import org.up.roque.ui.util.UIUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,17 +19,9 @@ public class HeaderPanel extends JPanel {
   private final JButton employeeButton = new JButton("Employees");
 
   public HeaderPanel() {
-    JPanel leftPanel = new JPanel(new FlowLayout(LEFT));
-    leftPanel.add(returnButton);
-    leftPanel.add(homeButton);
-    JPanel centerPanel = new JPanel(new FlowLayout(CENTER));
-    centerPanel.add(selectedViewTitle);
-    JPanel rightPanel = new JPanel(new FlowLayout(RIGHT));
-    rightPanel.add(projectButton);
-    rightPanel.add(employeeButton);
-    this.add(leftPanel);
-    this.add(centerPanel);
-    this.add(rightPanel);
+    this.add(UIUtil.leftFlowPanelWithAlignment(returnButton, homeButton));
+    this.add(UIUtil.centerFlowPanelWithAlignment(selectedViewTitle));
+    this.add(UIUtil.rightFlowPanelWithAlignment(projectButton, employeeButton));
     styleComponents();
   }
 

@@ -14,7 +14,7 @@ import org.up.roque.ui.util.CustomFormPanel;
 public class ProjectForm extends CustomFormPanel<Project> {
   private final NamedTextFieldPanel name = new NamedTextFieldPanel("Name");
   @Getter
-  private final ScrollableJTable<Employee, Integer> employeeTable;
+  private final ScrollableJTable<Employee> employeeTable;
 
   public ProjectForm(String title, MainFrame frame, ProjectService service, EmployeeService employeeService) {
     super(title, frame, service);

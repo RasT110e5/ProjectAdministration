@@ -13,17 +13,17 @@ The project should be able to manage many projects
 
 1. Manage **projects** 
 
-    1.1 Each project has many tasks
+    1.1 Each project has many tasks <font color="green">DONE</font>
 
     1.2 Each project has many assigned employees <font color="green">DONE</font>
 
 2. Manage **tasks**
 
-    2.1 Every project has tasks and each task has an assigned employee
+    2.1 Every project has tasks and each task has an assigned employee <font color="green">DONE</font>
 
-    2.2 Every task has a *title*, *description*, *estimation*, *actual duration* and other properties
+    2.2 Every task has a *title*, *description*, *estimation*, *actual duration* and other properties <font color="green">DONE</font>
 
-    2.3 Every task is assigned to an employee
+    2.3 Every task is assigned to an employee <font color="green">DONE</font>
 
 3. Manage **employees**
 
@@ -33,7 +33,7 @@ The project should be able to manage many projects
 
 1. Employees have their own cost per hour <font color="green">DONE</font>
 2. Have a *"pool"* of employees free to assign in the view when creating a project <font color="green">DONE</font>
-3. Report on the cost and hours spent in a project
+3. Report on the cost and hours spent in a project <font color="green">DONE</font>
 4. Maintain a change history for each task to be shown in the task view
 
 ### Bonus functionality

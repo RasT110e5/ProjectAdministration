@@ -60,5 +60,6 @@ public class EmployeeCrudRepositoryImpl extends CrudRepositoryTemplate<Employee,
   @Override
   protected void deleteFromRelationalTables(Integer id) {
     template.delete("DELETE FROM EMPLOYEE_PROJECT WHERE EMPLOYEE=?", getIdAsParam(id));
+    template.delete("DELETE FROM TASK WHERE ASSIGNED_EMPLOYEE=?", getIdAsParam(id));
   }
 }

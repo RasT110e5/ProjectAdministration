@@ -13,7 +13,7 @@ public class OnClickActionListener implements MouseListener {
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    changeForegoundColorTo(e, Color.BLUE);
+    changeForegroundColorTo(e, Color.BLUE);
     action.run();
   }
 
@@ -29,15 +29,15 @@ public class OnClickActionListener implements MouseListener {
 
   @Override
   public void mouseEntered(MouseEvent e) {
-    changeForegoundColorTo(e, Color.GRAY);
+    changeForegroundColorTo(e, Color.GRAY);
   }
 
   @Override
   public void mouseExited(MouseEvent e) {
-    changeForegoundColorTo(e, Color.BLUE);
+    changeForegroundColorTo(e, Color.BLUE);
   }
 
-  private void changeForegoundColorTo(MouseEvent e, Color blue) {
+  private void changeForegroundColorTo(MouseEvent e, Color blue) {
     Component component = e.getComponent();
     if (component instanceof JLabel) {
       JLabel label = (JLabel) component;

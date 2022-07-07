@@ -12,7 +12,7 @@ import javax.swing.*;
 import java.util.Set;
 
 public class TaskTablePanel extends JPanel {
-  private final ScrollableJTable<Task, Integer> table;
+  private final ScrollableJTable<Task> table;
   private final CRUDButtonComponent buttonsLayout = new CRUDButtonComponent();
   private final MainFrame frame;
   private final Project project;

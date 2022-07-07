@@ -10,7 +10,7 @@ public abstract class CustomPanel extends JPanel {
   @Getter
   private final String title;
 
-  public CustomPanel(String title, MainFrame frame) {
+  protected CustomPanel(String title, MainFrame frame) {
     this.title = title;
     this.frame = frame;
   }

@@ -14,18 +14,14 @@ import java.awt.*;
 import java.util.Set;
 
 public class ProjectStatusPanel extends CustomPanel {
-  private final Project project;
-  private final ProjectProgress projectProgress;
-  private final TaskTablePanel taskTablePanel;
 
   public ProjectStatusPanel(MainFrame frame, TaskService service, Project project) {
     super(project.getName(), frame);
-    this.project = project;
     Set<Task> tasks = service.findAllByProject(project);
-    taskTablePanel = new TaskTablePanel(frame, service, tasks, project);
+    TaskTablePanel taskTablePanel = new TaskTablePanel(frame, service, tasks, project);
     this.add(taskTablePanel);
     this.add(Box.createHorizontalStrut(25));
-    projectProgress = new ProjectProgress(tasks);
+    ProjectProgress projectProgress = new ProjectProgress(tasks);
     this.add(UIUtil.centerFlowPanelWithAlignment(projectProgress));
     this.setLayout(new FlowLayout(FlowLayout.CENTER));
   }

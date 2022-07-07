@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class TaskTableModel extends CustomTableModel<Task, Integer> {
+public class TaskTableModel extends CustomTableModel<Task> {
   public TaskTableModel(MainFrame frame, TaskService service, Set<Task> tasks) {
     super(frame, service, tasks);
     List<TableColumn<?, Task>> columns = new ArrayList<>();

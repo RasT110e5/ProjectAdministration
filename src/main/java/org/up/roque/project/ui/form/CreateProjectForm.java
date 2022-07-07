@@ -7,7 +7,7 @@ import org.up.roque.ui.MainFrame;
 
 public class CreateProjectForm extends ProjectForm {
   public CreateProjectForm(MainFrame frame, ProjectService projectService, EmployeeService employeeService) {
-    super("Add new employee", frame, projectService, employeeService);
+    super("Create new project", frame, projectService, employeeService);
     saveButton.addActionListener(e -> save());
   }
 

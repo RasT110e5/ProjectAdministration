@@ -7,7 +7,6 @@ import org.up.roque.project.employee.Employee;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -76,8 +75,4 @@ public class ProjectCrudRepositoryImpl extends CrudRepositoryTemplate<Project, I
     );
   }
 
-  @Override
-  public Set<Integer> getTasksIds(Project entity) {
-    return Collections.emptySet();
-  }
 }

@@ -11,7 +11,7 @@ public abstract class EmployeeForm extends CustomFormPanel<Employee> {
   private final NamedTextFieldPanel name = new NamedTextFieldPanel("Name");
   private final NamedTextFieldPanel costPerHour = new NamedTextFieldPanel("Cost per hour");
 
-  public EmployeeForm(String title, MainFrame frame, EmployeeService service) {
+  protected EmployeeForm(String title, MainFrame frame, EmployeeService service) {
     super(title, frame, service);
     init(name, costPerHour);
     saveButton.addActionListener(e -> frame.showEmployeeView());

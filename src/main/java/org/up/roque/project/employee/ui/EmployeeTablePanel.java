@@ -11,7 +11,7 @@ import org.up.roque.ui.util.CustomPanel;
 import javax.swing.*;
 
 public class EmployeeTablePanel extends CustomPanel {
-  private final ScrollableJTable<Employee, Integer> table;
+  private final ScrollableJTable<Employee> table;
   private final CRUDButtonComponent buttonsLayout = new CRUDButtonComponent();
 
   public EmployeeTablePanel(MainFrame frame, EmployeeService employeeService) {
