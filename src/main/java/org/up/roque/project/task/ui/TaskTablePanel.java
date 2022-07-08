@@ -16,6 +16,7 @@ public class TaskTablePanel extends JPanel {
   private final CRUDButtonComponent buttonsLayout = new CRUDButtonComponent();
   private final MainFrame frame;
   private final Project project;
+  private final JButton viewButton = new JButton("View");
 
   public TaskTablePanel(MainFrame frame, TaskService service, Set<Task> tasks, Project project) {
     TaskTableModel model = new TaskTableModel(frame, service, tasks);
@@ -25,15 +26,18 @@ public class TaskTablePanel extends JPanel {
 
     addActionListeners();
 
-    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     this.add(table.getScrollPane());
+    buttonsLayout.addNewButton(viewButton);
     this.add(buttonsLayout);
+
+    this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
   }
 
   private void addActionListeners() {
     buttonsLayout.addActionListenerToDelete(e -> deleteTask());
     buttonsLayout.addActionListenerToAdd(e -> frame.showTaskCreateForm(project));
     buttonsLayout.addActionListenerToEdit(e -> showTaskToEdit());
+    viewButton.addActionListener(e -> showTaskToView());
   }
 
   private void deleteTask() {
@@ -45,5 +49,11 @@ public class TaskTablePanel extends JPanel {
     Task entity = table.getSelectedItem();
     if (entity != null)
       frame.showTaskEditForm(entity, project);
+  }
+
+  private void showTaskToView() {
+    Task entity = table.getSelectedItem();
+    if (entity != null)
+      frame.showTaskViewPanel(entity);
   }
 }

@@ -33,7 +33,7 @@ public abstract class TaskForm extends CustomFormPanel<Task> {
 
   private static Component getEmployeeRenderer(JList<? extends Employee> list,
                                                Employee value, int index, boolean isSelected, boolean cellHasFocus) {
-    return new JLabel("Name: %s - Cost per hour: $%d".formatted(value.getName(), value.getCostPerHour()));
+    return new JLabel(value.getFormatedNameAndCost());
   }
 
   protected String getNameContent() {

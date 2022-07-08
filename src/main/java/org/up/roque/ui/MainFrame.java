@@ -12,6 +12,7 @@ import org.up.roque.project.employee.ui.form.CreateEmployeeForm;
 import org.up.roque.project.employee.ui.form.EditEmployeeForm;
 import org.up.roque.project.task.Task;
 import org.up.roque.project.task.TaskService;
+import org.up.roque.project.task.ui.TaskViewPanel;
 import org.up.roque.project.task.ui.form.CreateTaskForm;
 import org.up.roque.project.task.ui.form.EditTaskForm;
 import org.up.roque.project.ui.ProjectStatusPanel;
@@ -102,6 +103,10 @@ public class MainFrame extends WindowAdapter {
     navigate(new EditTaskForm(this, taskService, project, task));
   }
 
+  public void showTaskViewPanel(Task task) {
+    navigate(new TaskViewPanel(this, task));
+  }
+
   public void showEmployeeEditForm(Employee employee) {
     navigate(new EditEmployeeForm(this, employeeService, employee));
   }
@@ -144,4 +149,5 @@ public class MainFrame extends WindowAdapter {
     jFrame.setVisible(false);
     this.running = false;
   }
+
 }

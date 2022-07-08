@@ -34,4 +34,8 @@ public class Employee implements PartOfProject, Entity<Integer> {
   public void removeFromProject(Project project) {
     this.projects.remove(project);
   }
+
+  public String getFormatedNameAndCost() {
+    return "Name: %s - Cost per hour: $%d".formatted(this.name, this.costPerHour);
+  }
 }

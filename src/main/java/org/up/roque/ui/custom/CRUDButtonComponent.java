@@ -27,4 +27,8 @@ public class CRUDButtonComponent extends JPanel {
   public void addActionListenerToEdit(ActionListener listener) {
     edit.addActionListener(listener);
   }
+
+  public void addNewButton(JButton button) {
+    this.add(button);
+  }
 }
