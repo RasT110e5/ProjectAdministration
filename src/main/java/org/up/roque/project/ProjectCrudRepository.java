@@ -1,6 +1,6 @@
 package org.up.roque.project;
 
-import org.up.roque.db.CrudRepository;
+import org.up.roque.project.util.CrudRepository;
 
 import java.util.Set;
 

@@ -3,9 +3,7 @@ package org.up.roque.project.task;
 import lombok.extern.slf4j.Slf4j;
 import org.up.roque.db.DataAccessException;
 import org.up.roque.project.Project;
-import org.up.roque.project.task.comment.Comment;
 import org.up.roque.project.task.comment.CommentService;
-import org.up.roque.project.task.comment.CommentServiceImpl;
 import org.up.roque.project.util.ProcessingException;
 import org.up.roque.project.util.ServiceTemplate;
 
@@ -41,9 +39,7 @@ public class TaskServiceImpl extends ServiceTemplate<Task, Integer> implements T
   @Override
   public Set<Task> findAllBy(Project project) {
     try {
-      Set<Task> allByProject = this.taskRepository.findAllByProject(project);
-      addCommentsToTasks(allByProject);
-      return allByProject;
+      return this.taskRepository.findAllByProject(project);
     } catch (DataAccessException e) {
       log.warn("Exception while trying to get tasks for project: '{}', exception: {}", project, e.toString());
       throw new ProcessingException("Tasks couldn't be found");

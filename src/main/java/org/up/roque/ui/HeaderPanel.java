@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Locale;
 
-import static java.awt.FlowLayout.*;
+import static java.awt.FlowLayout.CENTER;
 
 @Getter
 public class HeaderPanel extends JPanel {

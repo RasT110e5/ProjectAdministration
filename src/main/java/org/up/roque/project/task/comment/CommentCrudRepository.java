@@ -1,6 +1,6 @@
 package org.up.roque.project.task.comment;
 
-import org.up.roque.db.CrudRepository;
+import org.up.roque.project.util.CrudRepository;
 import org.up.roque.project.task.Task;
 
 import java.util.Set;

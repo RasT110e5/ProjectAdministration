@@ -142,7 +142,7 @@ public class MainFrame extends WindowAdapter {
   }
 
   private void setUpFrame() {
-    jFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+    jFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
     jFrame.addWindowListener(this);
   }
 

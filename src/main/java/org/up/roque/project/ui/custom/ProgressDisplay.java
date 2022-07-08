@@ -3,7 +3,6 @@ package org.up.roque.project.ui.custom;
 import org.up.roque.ui.util.UIUtil;
 
 import javax.swing.*;
-
 import java.awt.*;
 
 import static javax.swing.SwingConstants.CENTER;

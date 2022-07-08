@@ -4,10 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.up.roque.db.util.CrudRepositoryTemplate;
 import org.up.roque.db.util.DBTemplate;
 import org.up.roque.db.util.SqlParam;
-import org.up.roque.project.Project;
 import org.up.roque.project.task.Task;
 import org.up.roque.project.task.TaskCrudRepository;
-import org.up.roque.project.task.TaskStatus;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

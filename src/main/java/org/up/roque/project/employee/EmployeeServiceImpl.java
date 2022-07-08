@@ -1,7 +1,9 @@
 package org.up.roque.project.employee;
 
 import lombok.extern.slf4j.Slf4j;
+import org.up.roque.db.DataAccessException;
 import org.up.roque.project.Project;
+import org.up.roque.project.util.ProcessingException;
 import org.up.roque.project.util.ServiceTemplate;
 
 import java.util.Set;
@@ -17,6 +19,11 @@ public class EmployeeServiceImpl extends ServiceTemplate<Employee, Integer> impl
 
   @Override
   public Set<Employee> findAllBy(Project project) {
-    return this.employeeRepository.findAllByProject(project);
+    try {
+      return this.employeeRepository.findAllByProject(project);
+    } catch (DataAccessException e) {
+      log.warn("There was an exception while finding all employess for project: {}, exception: {}", project, e.toString());
+      throw new ProcessingException(e.getMessage());
+    }
   }
 }

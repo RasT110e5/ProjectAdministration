@@ -16,11 +16,8 @@ public class ProjectCrudRepositoryImpl extends CrudRepositoryTemplate<Project, I
   private static final String ID_COLUMN = "ID";
   private static final String TABLE = "PROJECT";
 
-  private final DBTemplate template;
-
   public ProjectCrudRepositoryImpl(DBTemplate dbTemplate) {
     super(dbTemplate, TABLE, Integer.class, ID_COLUMN, NAME_COLUMN);
-    this.template = dbTemplate;
   }
 
   @Override

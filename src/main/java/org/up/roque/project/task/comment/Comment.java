@@ -2,7 +2,6 @@ package org.up.roque.project.task.comment;
 
 import lombok.*;
 import org.up.roque.db.Entity;
-import org.up.roque.db.NamedEntity;
 import org.up.roque.project.task.Task;
 
 @Data

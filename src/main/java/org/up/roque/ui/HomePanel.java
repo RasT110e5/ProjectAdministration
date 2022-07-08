@@ -14,7 +14,6 @@ import java.util.Set;
 
 @Slf4j
 public class HomePanel extends CustomPanel {
-  private final JPanel newProjectCenteredPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
   private final ProjectService projectService;
 
   public HomePanel(MainFrame frame, ProjectService projectService) {

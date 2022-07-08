@@ -2,7 +2,6 @@ package org.up.roque.project.util;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.up.roque.db.CrudRepository;
 import org.up.roque.db.DataAccessException;
 import org.up.roque.db.Entity;
 
