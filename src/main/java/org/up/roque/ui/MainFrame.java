@@ -12,6 +12,7 @@ import org.up.roque.project.employee.ui.form.CreateEmployeeForm;
 import org.up.roque.project.employee.ui.form.EditEmployeeForm;
 import org.up.roque.project.task.Task;
 import org.up.roque.project.task.TaskService;
+import org.up.roque.project.task.comment.CommentService;
 import org.up.roque.project.task.ui.TaskViewPanel;
 import org.up.roque.project.task.ui.form.CreateTaskForm;
 import org.up.roque.project.task.ui.form.EditTaskForm;
@@ -38,12 +39,14 @@ public class MainFrame extends WindowAdapter {
   private EmployeeService employeeService;
   private ProjectService projectService;
   private TaskService taskService;
+  private CommentService commentService;
   private boolean running;
 
   public void init(Application application) {
     this.employeeService = application.getEmployeeService();
     this.projectService = application.getProjectService();
     this.taskService = application.getTaskService();
+    this.commentService = application.getCommentService();
   }
 
   public void show() {
@@ -104,7 +107,7 @@ public class MainFrame extends WindowAdapter {
   }
 
   public void showTaskViewPanel(Task task) {
-    navigate(new TaskViewPanel(this, task));
+    navigate(new TaskViewPanel(this, commentService, task));
   }
 
   public void showEmployeeEditForm(Employee employee) {
@@ -120,6 +123,10 @@ public class MainFrame extends WindowAdapter {
     mainPanel.remove(1);
     mainPanel.add(navigateTo);
     headerPanel.setTitle(navigateTo.getTitle());
+    refresh();
+  }
+
+  public void refresh() {
     mainPanel.validate();
     mainPanel.repaint();
   }
