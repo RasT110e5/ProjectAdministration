@@ -1,17 +1,19 @@
 package org.up.roque.project.task.comment;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.up.roque.db.Entity;
+import org.up.roque.db.NamedEntity;
 import org.up.roque.project.task.Task;
 
-
-@EqualsAndHashCode
-public class Comment {
-  @Getter
+@Data
+@Builder
+@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Comment implements Entity<Integer> {
+  @EqualsAndHashCode.Include
+  private Integer id;
   private String content;
-  @Getter
-  @Setter
+  @ToString.Exclude
   private Task task;
 
   public Comment(String content) {

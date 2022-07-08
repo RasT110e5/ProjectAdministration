@@ -1,7 +1,7 @@
 package org.up.roque.project.task;
 
 import lombok.*;
-import org.up.roque.db.Entity;
+import org.up.roque.db.NamedEntity;
 import org.up.roque.project.PartOfProject;
 import org.up.roque.project.Project;
 import org.up.roque.project.employee.Employee;
@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Task implements PartOfProject, Entity<Integer> {
+public class Task implements PartOfProject, NamedEntity<Integer> {
   @EqualsAndHashCode.Include
   private Integer id;
   private String name;
@@ -41,14 +41,9 @@ public class Task implements PartOfProject, Entity<Integer> {
     this.project = project;
   }
 
-  public void comment(String content) {
-    Comment comment = new Comment(content);
+  public void comment(Comment comment) {
     comment.setTask(this);
     this.comments.add(comment);
-  }
-
-  public void deleteComment(Comment comment) {
-    this.comments.remove(comment);
   }
 
   public void assignEmployee(Employee employee) {

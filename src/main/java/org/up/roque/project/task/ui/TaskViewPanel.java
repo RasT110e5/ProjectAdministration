@@ -36,7 +36,6 @@ public class TaskViewPanel extends CustomPanel {
       nameLabel.setFont(new Font(Font.SERIF, Font.BOLD, 12));
       JLabel toDisplay = new JLabel(value, SwingConstants.CENTER);
       toDisplay.setFont(new Font(Font.SERIF, Font.PLAIN, 17));
-
       this.add(UIUtil.centerFlowPanelWithAlignment(nameLabel, toDisplay));
     }
 

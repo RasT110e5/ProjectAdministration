@@ -1,13 +1,13 @@
 package org.up.roque.ui.util;
 
-import org.up.roque.db.Entity;
+import org.up.roque.db.NamedEntity;
 import org.up.roque.project.util.ProcessingException;
 import org.up.roque.project.util.Service;
 import org.up.roque.ui.MainFrame;
 
 import javax.swing.*;
 
-public abstract class CustomFormPanel<T extends Entity<?>> extends CustomPanel {
+public abstract class CustomFormPanel<T extends NamedEntity<?>> extends CustomPanel {
   private final Service<T, ?> service;
   protected final JButton saveButton = new JButton("Save");
   private JPanel buttonPanel = UIUtil.rightFlowPanelWithAlignment(saveButton);

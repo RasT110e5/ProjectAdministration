@@ -1,7 +1,7 @@
 package org.up.roque.ui.util;
 
 import lombok.Setter;
-import org.up.roque.db.Entity;
+import org.up.roque.db.NamedEntity;
 import org.up.roque.project.util.ProcessingException;
 import org.up.roque.project.util.Service;
 import org.up.roque.ui.MainFrame;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public abstract class CustomTableModel<T extends Entity<?>> extends AbstractTableModel {
+public abstract class CustomTableModel<T extends NamedEntity<?>> extends AbstractTableModel {
   private final JFrame parentFrame;
   private final List<T> items;
   private final Service<T, ?> service;

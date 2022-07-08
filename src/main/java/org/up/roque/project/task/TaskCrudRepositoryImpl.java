@@ -7,9 +7,11 @@ import org.up.roque.db.util.SqlParam;
 import org.up.roque.project.Project;
 import org.up.roque.project.ProjectCrudRepository;
 import org.up.roque.project.employee.EmployeeCrudRepository;
+import org.up.roque.project.task.comment.CommentCrudRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -30,7 +32,8 @@ public class TaskCrudRepositoryImpl extends CrudRepositoryTemplate<Task, Integer
   private final ProjectCrudRepository projectRepo;
   private final EmployeeCrudRepository employeeRepo;
 
-  public TaskCrudRepositoryImpl(DBTemplate template, ProjectCrudRepository projectRepo, EmployeeCrudRepository employeeRepo) {
+  public TaskCrudRepositoryImpl(DBTemplate template, ProjectCrudRepository projectRepo,
+                                EmployeeCrudRepository employeeRepo) {
     super(template, TASK, Integer.class, ID_COLUMN, NAME_COLUMN, DESCRIPTION_COLUMN,
         ESTIMATED_HOURS_COLUMN, CREATED_DATE_COLUMN, ACTUAL_DURATION_COLUMN, STATUS,
         PROJECT_COLUMN, ASSIGNED_EMPLOYEE_COLUMN);

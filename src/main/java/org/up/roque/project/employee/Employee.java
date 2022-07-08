@@ -1,7 +1,7 @@
 package org.up.roque.project.employee;
 
 import lombok.*;
-import org.up.roque.db.Entity;
+import org.up.roque.db.NamedEntity;
 import org.up.roque.project.PartOfProject;
 import org.up.roque.project.Project;
 
@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Employee implements PartOfProject, Entity<Integer> {
+public class Employee implements PartOfProject, NamedEntity<Integer> {
   @EqualsAndHashCode.Include
   private Integer id;
   private String name;

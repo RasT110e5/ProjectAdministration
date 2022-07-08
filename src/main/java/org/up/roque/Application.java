@@ -15,6 +15,10 @@ import org.up.roque.project.employee.EmployeeServiceImpl;
 import org.up.roque.project.task.TaskCrudRepositoryImpl;
 import org.up.roque.project.task.TaskService;
 import org.up.roque.project.task.TaskServiceImpl;
+import org.up.roque.project.task.comment.CommentCrudRepository;
+import org.up.roque.project.task.comment.CommentCrudRepositoryImpl;
+import org.up.roque.project.task.comment.CommentService;
+import org.up.roque.project.task.comment.CommentServiceImpl;
 import org.up.roque.ui.MainFrame;
 
 @Slf4j
@@ -28,6 +32,8 @@ public class Application {
   private ProjectService projectService;
   @Getter
   private TaskService taskService;
+  @Getter
+  private CommentService commentService;
 
   public Application() {
     this.frame = new MainFrame();
@@ -56,7 +62,10 @@ public class Application {
     EmployeeCrudRepository employeeRepo = new EmployeeCrudRepositoryImpl(dbTemplate);
     employeeService = new EmployeeServiceImpl(employeeRepo);
     ProjectCrudRepository projectRepo = new ProjectCrudRepositoryImpl(dbTemplate);
-    taskService = new TaskServiceImpl(new TaskCrudRepositoryImpl(dbTemplate, projectRepo, employeeRepo));
+    TaskCrudRepositoryImpl taskRepo = new TaskCrudRepositoryImpl(dbTemplate, projectRepo, employeeRepo);
+    CommentCrudRepository commentRepo = new CommentCrudRepositoryImpl(dbTemplate, taskRepo);
+    commentService = new CommentServiceImpl(commentRepo);
+    taskService = new TaskServiceImpl(taskRepo, commentService);
     projectService = new ProjectServiceImpl(projectRepo, employeeService, taskService);
   }
 
