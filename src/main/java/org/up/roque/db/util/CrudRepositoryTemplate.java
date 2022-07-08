@@ -2,7 +2,6 @@ package org.up.roque.db.util;
 
 import org.up.roque.db.DataAccessException;
 import org.up.roque.db.Entity;
-import org.up.roque.db.NamedEntity;
 
 import java.util.*;
 import java.util.stream.Collectors;

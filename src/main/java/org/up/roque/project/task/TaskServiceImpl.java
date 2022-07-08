@@ -41,7 +41,9 @@ public class TaskServiceImpl extends ServiceTemplate<Task, Integer> implements T
   @Override
   public Set<Task> findAllBy(Project project) {
     try {
-      return this.taskRepository.findAllByProject(project);
+      Set<Task> allByProject = this.taskRepository.findAllByProject(project);
+      addCommentsToTasks(allByProject);
+      return allByProject;
     } catch (DataAccessException e) {
       log.warn("Exception while trying to get tasks for project: '{}', exception: {}", project, e.toString());
       throw new ProcessingException("Tasks couldn't be found");

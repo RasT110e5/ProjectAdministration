@@ -81,6 +81,7 @@ public class Application {
   }
 
   private void idle() {
+    //No global action needed to take when idling
   }
 
   private void stop() {

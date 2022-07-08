@@ -28,7 +28,6 @@ public class HomePanel extends CustomPanel {
   }
 
   private void addProjectLinks() {
-//    Set<Project> projects = projectService.findAllProjectsWithoutRelatedEntities();
     Set<Project> projects = projectService.findAll();
     for (Project project : projects) addProjectLink(project);
   }

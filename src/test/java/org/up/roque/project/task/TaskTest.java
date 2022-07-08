@@ -13,7 +13,7 @@ class TaskTest {
 
   private Task createTaskWithComment(String content) {
     Task task = Task.builder().build();
-    task.comment(content);
+    task.comment(new Comment(content));
     return task;
   }
 
@@ -30,15 +30,6 @@ class TaskTest {
     Task task = createTaskWithComment("Work is done.");
     assertThat(task.getComments()).isNotEmpty()
         .allSatisfy(c -> assertEquals(c.getTask(), task));
-  }
-
-  @Test
-  @DisplayName("comments should be deletable from the task")
-  void taskTest_2() {
-    Task task = createTaskWithComment("Work is done.");
-    Comment comment = task.getComments().get(0);
-    task.deleteComment(comment);
-    assertThat(task.getComments()).isEmpty();
   }
 
   @Test
